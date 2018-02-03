@@ -1,0 +1,15 @@
+tqdm
+colorama
+regex
+wikipedia
+google
+google-api
+pygame 
+mutagen
+#tk
+scrapy
+textblob
+#tensorflow-gpu>=1.4.0
+
+#pyqt4
+#python-tk
