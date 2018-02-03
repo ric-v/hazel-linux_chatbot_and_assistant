@@ -28,6 +28,9 @@ Clone the repository to your deivce home :
 Change present location to the project folder<br>
 > cd hazel-linux_chatbot_and_assistant/hazel/ <br>
 
+Download python modules
+> pip install -r requirements.txt
+
 Run the main.py file to get started with Hazel
 > python2 main.py
 
