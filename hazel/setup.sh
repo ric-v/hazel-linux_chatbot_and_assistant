@@ -1,6 +1,5 @@
 #! /bin/bash
 
-mkdir nltk_data
 mkdir nltk_data/tokenizers
 mkdir nltk_data/corpora
 
