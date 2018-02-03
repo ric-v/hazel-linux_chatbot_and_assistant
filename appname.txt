@@ -1,0 +1,28 @@
+Name            : google-chrome
+Version         : 63.0.3239.108-1
+Description     : The popular and trusted web browser by Google (Stable Channel)
+Architecture    : x86_64
+URL             : https://www.google.com/chrome
+Licenses        : custom:chrome
+Groups          : None
+Provides        : None
+Depends On      : alsa-lib  gconf  gtk3  libcups  libxss  libxtst  nss
+Optional Deps   : kdialog: for file dialogs in KDE
+                  gnome-keyring: for storing passwords in GNOME keyring [installed]
+                  kwallet: for storing passwords in KWallet [installed]
+                  gtk3-print-backends: for printing [installed]
+                  libunity: for download progress on KDE [installed]
+                  ttf-liberation: fix fonts for some PDFs (CRBug #369991) [installed]
+                  xdg-utils [installed]
+Required By     : None
+Optional For    : None
+Conflicts With  : None
+Replaces        : None
+Installed Size  : 177.05 MiB
+Packager        : Unknown Packager
+Build Date      : Thursday 21 December 2017 12:06:29 AM IST
+Install Date    : Thursday 21 December 2017 12:08:35 AM IST
+Install Reason  : Explicitly installed
+Install Script  : Yes
+Validated By    : None
+

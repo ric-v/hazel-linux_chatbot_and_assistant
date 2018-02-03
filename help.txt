@@ -1,0 +1,17 @@
+Hazel - linux chatbot and system assistant
+
+Hustle up your Linux experience with Hazel the chatbot for your Linux. Hazel can ease your day-to-day activities by performing system operations without any prior knowledge of the terminal. You can chat with the bot or ask it to perform. 
+
+1. Package management:
+
+	a) Install a new package/software from the official repository
+	   eg:  "can you install firefox"
+		"install google chrome"
+	b) Uninstall or remove a software package
+	   eg:  "remove audacious"
+		"delete gnome music from my system"
+	c) Updating your system and applications
+	   eg:  "Upgrade my system"
+	   	"update all apps"
+
+2. System management:
