@@ -31,6 +31,14 @@ Change present location to the project folder<br>
 Download other essential packages<br>
 > sudo pacman -S yaourt pacaur most python2-pyqt4 make fakeroot
 
+Setup nltk_data (skip this step if you already have nltk_data folder in your home folder or anywhere else)
+>./setup.sh<br>
+
+This script only installs essential nltk data, to get the whole nltk data, open a python shell<br>
+> python2<br>
+> > import nltk<br>
+> > nltk.download()
+
 Download python modules
 > pip install -r requirements.txt
 
