@@ -17,10 +17,8 @@ You might need to grab the following to start using Hazel<br>
 * **Ability to read and type in English** and the ability to open  **terminal** all by yourself.... LOL! JK...
 
 
-
-Download manjaro linux here - http://manjaro.org/get-manjaro/
-or
-Get an Arch-based Linux here - https://en.wikipedia.org/wiki/Arch_Linux#Derivatives
+Download [Manjaro Linux](http://manjaro.org/get-manjaro/)<br>or<br>
+Get an [Arch-based Linux](https://en.wikipedia.org/wiki/Arch_Linux#Derivatives)
 
 ### Install and Run Hazel on your system...
 
