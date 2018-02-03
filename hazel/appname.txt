@@ -1,0 +1,35 @@
+Name            : cmus
+Version         : 2.7.1-9
+Description     : Feature-rich ncurses-based music player
+Architecture    : x86_64
+URL             : https://cmus.github.io/
+Licenses        : GPL
+Groups          : None
+Provides        : None
+Depends On      : ncurses  libcue  libdiscid
+Optional Deps   : alsa-lib: for ALSA output plugin support [installed]
+                  libao: for AO output plugin support [installed]
+                  libpulse: for PulseAudio output plugin support [installed]
+                  faad2: for AAC input plugin support [installed]
+                  ffmpeg: for ffmpeg input plugin support [installed]
+                  flac: for flac input plugin support [installed]
+                  libmad: for mp3 input plugin support [installed]
+                  libmodplug: for modplug input plugin support [installed]
+                  libmp4v2: for mp4 input plugin support [installed]
+                  libmpcdec: for musepack input plugin support [installed]
+                  libvorbis: for vorbis input plugin support [installed]
+                  libcdio-paranoia: for cdio support [installed]
+                  opusfile: for opus input plugin support
+                  wavpack: for wavpack input plugin support [installed]
+Required By     : None
+Optional For    : None
+Conflicts With  : None
+Replaces        : None
+Installed Size  : 653.00 KiB
+Packager        : Antonio Rojas <arojas@archlinux.org>
+Build Date      : Friday 12 January 2018 05:12:30 AM IST
+Install Date    : Saturday 03 February 2018 06:48:24 PM IST
+Install Reason  : Explicitly installed
+Install Script  : No
+Validated By    : Signature
+

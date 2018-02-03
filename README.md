@@ -28,6 +28,9 @@ Clone the repository to your deivce home :
 Change present location to the project folder<br>
 > cd hazel-linux_chatbot_and_assistant/hazel/ <br>
 
+Download other essential packages<br>
+> sudo pacman -S yaourt pacaur most python2-pyqt4 make fakeroot
+
 Download python modules
 > pip install -r requirements.txt
 
