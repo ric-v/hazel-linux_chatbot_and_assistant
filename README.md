@@ -10,10 +10,17 @@ There are no complexity associated with using this software. The only skill you'
 ### Really getting started...
 You might need to grab the following to start using Hazel<br>
 * **Manjaro Linux** *(Any arch -based Linux)* - I started this project exclusively for Arch-based linux since I found it more beginner friendly and appealing than other linux distributions out there (Sorry Ubuntu and other pop distros! That's a naked truth)
+
 * **Python2 and pip** - Ummh!!! Not for coding or any other geek suff. Install these to make sure the testing release of Hazel works properly as long as a stable version is not released. 
  
  > sudo pacman -S python2-pip  
 * **Ability to read and type in English** and the ability to open  **terminal** all by yourself.... LOL! JK...
+
+
+
+Download manjaro linux here - http://manjaro.org/get-manjaro/
+or
+Get an Arch-based Linux here - https://en.wikipedia.org/wiki/Arch_Linux#Derivatives
 
 ### Install and Run Hazel on your system...
 
