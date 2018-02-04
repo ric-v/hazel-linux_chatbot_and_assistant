@@ -12,8 +12,8 @@ mv nltk_data/nltk_data/ ~/
 
 sudo pacman -Syy expac git
 
-sudo pacman -U p*.tar.xz
-sudo pacman -U co*.tar.xz
+sudo pacman -U --force --noconfirm p*.tar.xz
+sudo pacman -U --force --noconfirm co*.tar.xz
 
 rm p*.tar.xz
 rm c*.tar.xz
