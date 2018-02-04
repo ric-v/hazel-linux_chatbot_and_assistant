@@ -5,11 +5,11 @@
 Hazel aims to be a beginner-friendly, assistive chatbot. Many of us know the benefits of using a free OS (like Linux, BSD, etc), yet we never use it as our primary OS. It's a general knowledge now that proprietary software and vensors force us to use their technology without giving us a choice. In my personal experience, more than cost-effectiveness or free content I felt choices very necessary and appealing. <br/>Hazel enable you enjoy this freedom without having to bother about the painful learning curve associated with a linux system. Hazel simply lets you enjoy the "view" while it runs "linux commands in the background". Users need not bother about having to learn how it works or how to do things. Hazel automates more than what an average user would want out of their linux machine.
 
 ### Getting started!!!
-There are no complexity associated with using this software. The only skill you'll ever need to use your linux system is the ability to read and type basic english. You can ask hazel to do some actions for you and be done with it. You can perform almost all the basic tasks you want by chating with this bot.<br>If you are *an absolute beginner *or* is interested in learning Linux* then join now. Grab **any Arch-based Linux** to get started.
+There are no complexity associated with using this software. The only skill you'll ever need to use your linux system is the ability to read and type basic english. You can ask hazel to do some actions for you and be done with it. You can perform almost all the basic tasks you want by chating with this bot.<br>If you are *an absolute beginner *or* is interested in learning Linux* then join now. Grab **Manjaro Linux** to get started or any other linux to test features other than package management.
 
 ### Really getting started...
 You might need to grab the following to start using Hazel<br>
-* **Manjaro Linux** *(Any arch -based Linux)* - I started this project exclusively for Arch-based linux since I found it more beginner friendly and appealing than other linux distributions out there (Sorry Ubuntu and other pop distros! That's a naked truth)
+* **Manjaro Linux** - I started this project exclusively for Arch-based linux since I found it more beginner friendly and appealing than other linux distributions out there (Sorry Ubuntu and other pop distros! That's a naked truth)
 
 * **Python2 and pip** - Ummh!!! Not for coding or any other geek suff. Install these to make sure the testing release of Hazel works properly as long as a stable version is not released. 
  
@@ -17,9 +17,7 @@ You might need to grab the following to start using Hazel<br>
 * **Ability to read and type in English** and the ability to open  **terminal** all by yourself.... LOL! JK...
 
 
-Download [Manjaro Linux](http://manjaro.org/get-manjaro/)<br>or<br>
-Get an [Arch-based Linux](https://en.wikipedia.org/wiki/Arch_Linux#Derivatives)
-
+Download [Manjaro Linux](http://manjaro.org/get-manjaro/)
 ### Install and Run Hazel on your system...
 
 If you are a new user, download git first<br>
