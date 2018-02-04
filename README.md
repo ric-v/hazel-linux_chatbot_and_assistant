@@ -22,14 +22,14 @@ Get an [Arch-based Linux](https://en.wikipedia.org/wiki/Arch_Linux#Derivatives)
 
 ### Install and Run Hazel on your system...
 
+If you are a new user, download git first<br>
+> sudo pacman -S git <br>
+
 Clone the repository to your deivce home :
 > git clone https://github.com/illuminati-RV/hazel-linux_chatbot_and_assistant.git <br>
 
 Change present location to the project folder<br>
 > cd hazel-linux_chatbot_and_assistant/hazel/ <br>
-
-Download other essential packages<br>
-> sudo pacman -S yaourt pacaur most python2-pyqt4 make fakeroot
 
 Setup nltk_data (skip this step if you already have nltk_data folder in your home folder or anywhere else)
 >./setup.sh<br>
