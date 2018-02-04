@@ -31,16 +31,13 @@ Clone the repository to your deivce home :
 Change present location to the project folder<br>
 > cd hazel-linux_chatbot_and_assistant/hazel/ <br>
 
-Setup nltk_data (skip this step if you already have nltk_data folder in your home folder or anywhere else)
+Setup nltk_data and other requirements
 >./setup.sh<br>
 
-This script only installs essential nltk data, to get the whole nltk data, open a python shell<br>
+[Optional] This script only installs essential nltk data, to get the whole nltk data, open a python shell<br>
 > python2<br>
 > > import nltk<br>
 > > nltk.download()
-
-Download python modules
-> pip install -r requirements.txt
 
 Run the main.py file to get started with Hazel
 > python2 main.py

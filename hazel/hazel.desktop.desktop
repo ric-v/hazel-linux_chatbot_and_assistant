@@ -1,0 +1,19 @@
+[Desktop Entry]
+Categories=System;
+Comment=Show basic info of the computer.
+Exec=gnome-terminal --full-screen -e 'python2 main.py'
+GenericName=assistive chatbot
+Icon=~/hazel-linux_chatbot_and_assistant/hazel/hazel.png
+Name=hazel
+#OnlyShowIn=Deepin;
+Terminal=false
+Type=Application
+#X-AppStream-Ignore=true
+#X-Deepin-AppID=dde-computer
+
+# Translations:
+# Do not manually modify!
+
+Name[en_IN]=hazel
+Path=~/hazel-linux_chatbot_and_assistant/hazel/
+StartupNotify=false

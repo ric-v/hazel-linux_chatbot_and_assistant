@@ -10,10 +10,16 @@ rm -rf nltk_data/
 
 mv nltk_data/nltk_data/ ~/
 
-sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fakeroot
+sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fakeroot gnome-terminal
 
 sudo pacman -U --force --noconfirm co*.tar.xz
 sudo pacman -U --force --noconfirm p*.tar.xz
 
 rm p*.tar.xz
 rm c*.tar.xz
+
+pip2 install -r requirements.txt
+
+echo "Hazel is ready to work"
+
+mv -f hazel.desktop.desktop ~/.local/share/applications/

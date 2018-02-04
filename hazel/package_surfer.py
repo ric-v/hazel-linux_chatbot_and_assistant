@@ -130,6 +130,7 @@ def remover(pc, d):
         pkg = d[int(select-1)]
         os.system("pacaur -Qi " + pkg + " > appname.txt")
         os.system("most appname.txt")
+        os.system("rm appname.txt")
         print "\n\nDo you wish to uninstall", pkg, "?"
         confirm = raw_input("Type 'y' to continue; 'n' to reselect; 'q' to quit : ")
         
