@@ -20,8 +20,12 @@ sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fa
 
 pip2 install -r requirements.txt
 
-echo "Hazel is ready to work"
 
 mkdir .local/share/applications
 
 mv -f hazel.desktop.desktop ~/.local/share/applications/
+
+echo "
+
+"
+echo "Hazel is ready to work"
