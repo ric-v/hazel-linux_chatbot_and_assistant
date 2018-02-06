@@ -158,7 +158,6 @@ clutter-gst
 clutter-gtk
 cmake
 cmatrix
-cmus
 colord
 colord-gtk
 composer
@@ -667,7 +666,6 @@ libcdio-paranoia
 libcdr
 libconfig
 libcroco
-libcue
 libcups
 libcurl-compat
 libdaemon
@@ -678,7 +676,6 @@ libdbusmenu-gtk3
 libdbusmenu-qt5
 libdc1394
 libdca
-libdiscid
 libdmx
 libdnet
 libdrm
@@ -910,9 +907,8 @@ linux414
 linux414-headers
 linux414-r8168
 linux414-virtualbox-host-modules
-linux49
-linux49-headers
-linux49-r8168
+linux415
+linux415-virtualbox-guest-modules
 llvm-libs
 lm_sensors
 logrotate
