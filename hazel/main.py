@@ -13,7 +13,6 @@ import difflib
 import operator
 from bs4 import *
 from nltk import *
-import wikipedia as w
 from PyQt4.QtGui import *
 from hazel_chatter import *
 from package_surfer import *
@@ -29,11 +28,11 @@ from vocabulary.vocabulary import Vocabulary as vb
 
 ### FUNCTION TO HANDLE EVENTS SUCH AS ctrl+C OR ctrl+Z TO PREVENT THE PROGRAM FROM TERMINATION ###
 
-def sigint_handler(signum, frame):
-    print '' # Display message on occurance of below events
+# def sigint_handler(signum, frame):
+#     print '' # Display message on occurance of below events
 
-signal.signal(signal.SIGINT, sigint_handler) # handle Ctrl+C on event
-signal.signal(signal.SIGTSTP, sigint_handler) # handle Ctrl+Z on event
+# signal.signal(signal.SIGINT, sigint_handler) # handle Ctrl+C on event
+# signal.signal(signal.SIGTSTP, sigint_handler) # handle Ctrl+Z on event
 
 
 
@@ -52,10 +51,12 @@ def others(tokens, message): # Funtion defention of Others, passed arguements ar
 
 
     ### WIKIPEDIA SEARCH ####
-
+    print len(tokens),(message)
     if "search" in tokens: # wikipedia search for famous personals or movies or popular titles ### NOT WORKING PROPERLY ###
+        print "wiki websearch"
         try:
             from wikiapi import WikiApi
+            import wikipedia as w
             wiki = WikiApi()
             WikiApi({'locale': 'en'})
             tokens.remove("search") # remove search keyword to retrieve the main content to be searched
@@ -67,8 +68,9 @@ def others(tokens, message): # Funtion defention of Others, passed arguements ar
             #print "websearch\n"
             print "\n", results[0] # print the first search result
             print w.summary(s)
+            main()
         except Exception, e:
-            print "websearch failed"
+            print "websearch failed", e
 
 
     ### GOOGLE SEARCH ###

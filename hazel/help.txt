@@ -2,16 +2,28 @@ Hazel - linux chatbot and system assistant
 
 Hustle up your Linux experience with Hazel the chatbot for your Linux. Hazel can ease your day-to-day activities by performing system operations without any prior knowledge of the terminal. You can chat with the bot or ask it to perform. 
 
-1. Package management:
+What is it about?
 
-	a) Install a new package/software from the official repository
+Hazel aims to be a beginner-friendly, assistive chatbot. Many of us know the benefits of using a free OS (like Linux, BSD, etc), yet we never use it as our primary OS. It's a general knowledge now that proprietary software and vensors force us to use their technology without giving us a choice. In my personal experience, more than cost-effectiveness or free content I felt choices very necessary and appealing.
+Hazel enable you enjoy this freedom without having to bother about the painful learning curve associated with a linux system. Hazel simply lets you enjoy the "view" while it runs "linux commands in the background". Users need not bother about having to learn how it works or how to do things. Hazel automates more than what an average user would want out of their linux machine.
+
+1. Package management:
+	Package management determines a Linux distro. Each linux systems are distinguished primarly based on their package manager. Manjaro Linux uses pacman, a front end for libalpm, an arch linux package manager for managing packages. Hazel reduces your effort to install and maintain a package in your linux system without typing a single command. Users can search for their desired packages without knowing what they are called in repos. An example would be while installing gooogle chrome. In AUR, google chrome is uploaded as "google-chrome-stable", so a user who wishes to install chrome must type, "yaourt -S google-chrome-stable". What happens if you dont remember the whole command or the package name exactly, package manager offers tools to search for packages in repos. Hazel can do all those and automate your download in no time.
+
+	a) Install a new package/software from the official repository:
+		Installs software and packages from official repositories provided by the linux distribution (Manjaro Linux) and also utilizes the AUR repository for a wider range of applications and tries to automate the process so that users have the least to bother about package management. Some keywords and easy ways to perform this task are shown below. Besides these, Hazel analyzes the context of your input and work accordingly
+		
 	   eg:  "can you install firefox"
 		"install google chrome"
-	b) Uninstall or remove a software package
+
+	b) Uninstall or remove a software package:
+		To remove a package from your device hazel analyzes whether it is installed, if installed it is removed completely along with all dependancies with no user interaction
+
 	   eg:  "remove audacious"
 		"delete gnome music from my system"
-	c) Updating your system and applications
+
+	c) Updating your system and applications:
+		Hazel updates your OS and all applications installed along side to latest version after user authorizes it to do so.
+
 	   eg:  "Upgrade my system"
 	   	"update all apps"
-
-2. System management:

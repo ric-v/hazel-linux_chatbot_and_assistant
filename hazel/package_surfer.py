@@ -25,7 +25,7 @@ global a
 ### PACKAGE INSTALLER - Search and indexing from repo list ###
 
 def install(tokens):
-	
+	      
         os.system("sudo rm /var/lib/pacman/db.lck") # Unlock package manager
         st = " "
 	a = " "
