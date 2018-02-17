@@ -6,6 +6,7 @@ google
 google-api
 pygame 
 mutagen
+vocabulary
 #tk
 scrapy
 textblob

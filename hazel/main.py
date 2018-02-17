@@ -7,20 +7,28 @@
 import os
 import sys
 import time
-import random
+import socket
 import signal
+import random
 import difflib
 import operator
+import datetime
 from bs4 import *
 from nltk import *
+import wikipedia as w
+from wikisearch import *
+from systeminfo import *
 from PyQt4.QtGui import *
+from wikiapi import WikiApi
 from hazel_chatter import *
 from package_surfer import *
+from fileoperations import *
 from textblob import TextBlob
 from nltk.corpus import stopwords
 from difflib import SequenceMatcher
 from nltk.tokenize import word_tokenize
 from vocabulary.vocabulary import Vocabulary as vb
+
 
 ##########################################################################################################################
 
@@ -28,13 +36,11 @@ from vocabulary.vocabulary import Vocabulary as vb
 
 ### FUNCTION TO HANDLE EVENTS SUCH AS ctrl+C OR ctrl+Z TO PREVENT THE PROGRAM FROM TERMINATION ###
 
-# def sigint_handler(signum, frame):
-#     print '' # Display message on occurance of below events
+def sigint_handler(signum, frame):
+    print '' # Display message on occurance of below events
 
-# signal.signal(signal.SIGINT, sigint_handler) # handle Ctrl+C on event
-# signal.signal(signal.SIGTSTP, sigint_handler) # handle Ctrl+Z on event
-
-
+signal.signal(signal.SIGINT, sigint_handler) # handle Ctrl+C on event
+signal.signal(signal.SIGTSTP, sigint_handler) # handle Ctrl+Z on event
 
 def data(i):
     return i
@@ -51,32 +57,46 @@ def others(tokens, message): # Funtion defention of Others, passed arguements ar
 
 
     ### WIKIPEDIA SEARCH ####
-    print len(tokens),(message)
-    if "search" in tokens: # wikipedia search for famous personals or movies or popular titles ### NOT WORKING PROPERLY ###
-        print "wiki websearch"
+    
+    if "search" in tokens:
+        wiki(tokens, message) 
+
+
+    elif "ip" in tokens or "IP" in tokens:
         try:
-            from wikiapi import WikiApi
-            import wikipedia as w
-            wiki = WikiApi()
-            WikiApi({'locale': 'en'})
-            tokens.remove("search") # remove search keyword to retrieve the main content to be searched
-            st = "" # appends the remaining tokens to be searched for
-            for i in tokens:
-                s = st + i + " " # appending the tokens to form a search keyword
-            results = wiki.find(s) # package function to do online search
-            print("\033[1;37;1m") # set console color
-            #print "websearch\n"
-            print "\n", results[0] # print the first search result
-            print w.summary(s)
-            main()
-        except Exception, e:
-            print "websearch failed", e
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            print "Hazel : Your current IP address is", s.getsockname()[0]
+            s.close()
+        except Exception,e:
+            print "no connection"
+            s.close()
 
 
+    elif "new" in tokens and "user" in tokens or "new" in tokens and "account" in tokens:
+        adduser(tokens)
+
+    elif "change" in tokens and "password" in tokens:
+        chpasswd(tokens)
+
+    elif "remove" in tokens and "user" in tokens or "remove" in tokens and "account" in tokens or "delete" in tokens and "user" in tokens or "delete" in tokens and "account" in tokens:
+        deltuser(tokens)
+
+    elif "internet" in tokens and "active" in tokens or "internet" in tokens and "connected" in tokens:
+        is_connected()
+
+    elif "date" in tokens:
+        datenow(tokens)
+
+    elif "time" in tokens:
+        timenow(tokens)
+
+            
     ### GOOGLE SEARCH ###
 
     elif "howto" in tokens: # googler api search to display top 10 results from google with link, links open in default browser 
         cmd = "googler"
+        print "To quit the search results, type q"
         os.system(cmd + " " + message) # perform command in shell
 
 
@@ -86,37 +106,12 @@ def others(tokens, message): # Funtion defention of Others, passed arguements ar
         exit(0)
 
 
-    ### GOOGLE SEARCH NOT WORKING ####
-
-    elif "help" in tokens:
-        cmd = "googler"
-        print "To quit the search results, type q"
-        os.popen(cmd + " " + message)
-
-
     ### OPEN FILE MANAGER ###
     ### CURRENTLY SUPPORTS OPENING TEXT FILES OR PROGRAMMING FILES ###
 
-    elif "file" in tokens: # open qt gui file manager to choose a file which will be displayed in the same screen
-        print("\033[1;34;1m")
-        loc = raw_input("Enter the location you want to open or just press enter to open default direcotry : ") # Enter an absolute path. Look for tutorials on linux file paths for more details or simply press enter
+    elif "create" in tokens:
+        openfiles()
 
-        if not loc: # Open in a default locations, User home directory
-            a = QApplication(sys.argv)
-            w = QWidget()
-            filename = QFileDialog.getOpenFileName(w, 'Open File', '~/')
-            with open(filename, 'r') as f: # open a file in read mode
-                print "\n\n"
-                print("\033[1;37;1m")
-                print(f.read()) # diplay the file contents
-
-        else: # open file manager in the specified location
-            a = QApplication(sys.argv)
-            w = QWidget()
-            filename = QFileDialog.getOpenFileName(w, 'Open File', loc)
-            with open(filename, 'r') as f:
-                print "\n\n"
-                print(f.read())
 
 
     #### IF USER INTENDS TO DO NONE OF THE ABOVE ACTIONS, RUN THE hazel_chatter.py FILE TO GET NORMAL CHAT OUTPUTS ###
@@ -135,7 +130,7 @@ def others(tokens, message): # Funtion defention of Others, passed arguements ar
 def main():
 
     print("\033[1;34;1m")
-    print "\n\nHazel : Hey there, type 'h' to see all options or simply start chatting with me" # Initial message shown at every startup
+    print "\n\nHazel : Hey there, type 'h' to see all options, 'q' to quit or simply start chatting with me" # Initial message shown at every startup
 
     while True: # Enter the loop anyways
         print("\033[1;32;1m")
@@ -221,6 +216,43 @@ def main():
                     tok = "remove"
                     tokened.remove("uninstall")
 
+                elif "upgrade" in tokened:
+                    print tok
+                    if "system" in tokened:
+                        i = i + 1
+                        tok = "upgrade"
+                        tokened.remove("system")
+                    if "all" in tokened:
+                        i = i + 1
+                        tok = "upgrade"
+                        tokened.remove("all")
+                    if "apps" in tokened:
+                        i = i + 1
+                        tok = "upgrade"
+                        tokened.remove("apps")
+                    tokened.remove("upgrade")
+                    print "\nSystem updater\n"
+                    update(message) # call update function in package_surfer.py
+
+                elif "update" in tokened:
+                    print tok
+                    if "system" in tokened:
+                        i = i + 1
+                        tok = "upgrade"
+                        tokened.remove("system")
+                    if "all" in tokened:
+                        i = i + 1
+                        tok = "upgrade"
+                        tokened.remove("all")
+                    if "apps" in tokened:
+                        i = i + 1
+                        tok = "upgrade"
+                        tokened.remove("apps")
+                    tokened.remove("update")
+                    print "\nSystem updater\n"
+                    update(message) # call update function in package_surfer.py
+
+
                 elif "longer" in tokened:
                     if "need" in tokened:
                         i = i + 1
@@ -243,28 +275,24 @@ def main():
                         liner = line.strip() # remove white spaces
                         matcher = SequenceMatcher(None, liner, tokened[j]).ratio() # Match the list element with input term to see if a package has atleast 50% similar name as with the package in the repository
 
-                        if matcher >= 0.5: # if a package with >= 50% match is found, it is listed later
+                        if matcher >= 0.9: # if a package with >= 50% match is found, it is listed later
                             pcount = pcount + 1 # updates pcount since a package with match is found
 
-                if pcount > 0: # if atleast 1 package exists in repo_app_list.txt
-                    print("\033[1;34;1m")
+            if pcount > 0: # if atleast 1 package exists in repo_app_list.txt
+                print("\033[1;34;1m")
 
-                    if "install" is tok: # tok is install
-                        print "\nPackage Installer\n"
-                        install(message) # call install function in package_surfer.py
+                if "install" is tok: # tok is install
+                    print "\nPackage Installer\n"
+                    install(message) # call install function in package_surfer.py
 
-                    elif "remove" == tok: # tok is remove
-                        print "\nPackage Remover\n"
-                        remove(message) # call remove function in package_surfer.py
+                elif "remove" == tok: # tok is remove
+                    print "\nPackage Remover\n"
+                    remove(message) # call remove function in package_surfer.py
 
-                    elif "upgrade" == tok: # tok is update
-                        print "\nSystem updater\n"
-                        update(message) # call update function in package_surfer.py
-
-                    else: # If none of the above operation is triggered, it is not package management, redirect to other funtions
-                        others(tokens, message)
-                else:
+                else: # If none of the above operation is triggered, it is not package management, redirect to other funtions
                     others(tokens, message)
+            else:
+                others(tokens, message)
 
 main() # start executing the main.py file by calling main() funtion
 

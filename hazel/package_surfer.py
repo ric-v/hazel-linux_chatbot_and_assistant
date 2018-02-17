@@ -8,6 +8,7 @@ import os
 import sys
 import random
 import difflib
+import os.path
 import operator
 from nltk import *
 from nltk.corpus import stopwords
@@ -25,8 +26,12 @@ global a
 ### PACKAGE INSTALLER - Search and indexing from repo list ###
 
 def install(tokens):
-	      
-        os.system("sudo rm /var/lib/pacman/db.lck") # Unlock package manager
+
+        pacmandb = os.path.isfile("/var/lib/pacman/db.lck")
+        if pacmandb is False:
+            print ""
+        elif pacmandb is True:
+            os.system("sudo rm /var/lib/pacman/db.lck") # Unlock package manager
         st = " "
 	a = " "
 	d = {}
@@ -47,19 +52,21 @@ def install(tokens):
         if "want" in tokened:
             tokened.remove("want")
 
-	print "Hazel : searching and indexing best matches for ", tokened[0],"\n"
-	
+    
         for i in range(0, len(tokened)):
-	    st = st + " " + tokened[i] # Make out package name from tokens
+            st = st + " " + tokened[i] # Make out package name from tokens
+            #print st[2:]
+    	print "Hazel : searching and indexing best matches for", st[2:],"\n"
         a = os.popen("pacaur -Sqs " + st).read().split("\n")[:20] # Search and index first 20 results
         
         if len(a) <= 1: # if a has no entry
-            print "        No install candidates were found for ", tokened[0],". Are you sure you typed it right? Try again..."
-            os.system("notify-send -u critical Hazel 'No package found'")
+            print "        No install candidates were found for ", st[2:],". Are you sure you typed it right? Try again..."
+            os.system("notify-send -u critical Hazel 'package not found'")
             return
         
         else:
             installer(a) # Continue with installing process
+            return
 
 
 
@@ -77,7 +84,10 @@ def installer(a):
         print i+1, d[i]
     x = input("\nChoose the id of the package from the above list, which you want to install\npress '0' to exit \n: ")
     
-    if x is not 0:
+    if x is 0:
+        return
+
+    elif x is not 0:
     
         for i, j in enumerate(a): # Prepare package for installation from the  id chosen
             d[i] = j.split(" - ")[0]
@@ -89,7 +99,8 @@ def installer(a):
         
         if confirm is "y":
             os.system("notify-send -u critical Hazel 'Installing package'")
-            os.system("pacaur -S --force " + d[int(x-1)]) # Automated installation of package
+            print d[int(x-1)]
+            os.system("pacaur -S --force --noconfirm --noedit " + d[int(x-1)] + " > appl.txt") # Automated installation of package
             os.system("notify-send -u critical Hazel 'Succesfully installed'")
         
         elif confirm is "r": # Display
@@ -121,15 +132,20 @@ def installer(a):
 
 ### PACKAGE REMOVER - Search and index installed package ###
 
-def remove(tokens):
 
-        os.system("sudo rm /var/lib/pacman/db.lck") # remove lock file
+def remove(tokens):
+        
+        pacmandb = os.path.isfile("/var/lib/pacman/db.lck")
+        if pacmandb is False:
+            print ""
+        elif pacmandb is True:
+            os.system("sudo rm /var/lib/pacman/db.lck") # Unlock package manager
         st = " "
         a = " "
         d = {}
         i = 0
         pcount = 0
-        tokened = word_tokenize(tokens) # tokenizer
+        tokened = word_tokenize(tokens)
 
         if "remove" in tokens:
             tokened.remove("remove")
@@ -139,6 +155,7 @@ def remove(tokens):
                 i = i + 1
                 tok = "remove"
                 tokened.remove("want")
+                #break
             tok = "remove"
             tokened.remove("dont")
 
@@ -155,6 +172,7 @@ def remove(tokens):
                 i = i + 1
                 tok = "remove"
                 tokened.remove("rid")
+                #break
             tok = "install"
             tokened.remove("get")
 
@@ -173,74 +191,71 @@ def remove(tokens):
             tok = "remove"
             tokened.remove("longer")
             
-	print "Hazel : searching for ", tokened[0]," in /usr/bin\n"
+        print "Hazel : searching for ", tokened[0]," in the system\n"
         os.system("pacaur -Qqm > installed_apps.txt")
         os.system("pacaur -Qqn >> installed_apps.txt")
         
-        for i in range(0, len(tokened)): # Make out the package name to be removed
+        for i in range(0, len(tokened)):
             st = st + " " + tokened[i]
         
         with open('installed_apps.txt', 'r') as f:
             
             for line in f:
                 liner = line.strip()
-                matcher = SequenceMatcher(None, liner, st).ratio() # Match input to the packages already installed
+                matcher = SequenceMatcher(None, liner, st).ratio()
                 
-                if matcher >= 0.5: # If any package shows >= 50% similarity to search query, list them
+                if matcher >= 0.5:
+                    #print line, matcher
                     d[i] = liner
                     i = i + 1
+                    #print d[0]
                     pcount = pcount + 1
                 
                 else:
-                    pcount = 0
+                    pcountr = 0
             
-            if pcount >= 1: # If any packages found, remove them
+            if pcount >= 1:
                 remover(pcount, d)
             else:
-                os.system("notify-send -u critical Hazel 'No package are installed on your system with that name.'")
+                os.system("notify-send -u critical Hazel 'No package were installed with that name.'")
 
 
 
-
-##########################################################################################################################
-
-
-### PACKAGE REMOVER - Remove chosen package ###
 
 def remover(pc, d):
     pcount = pc
     
     for i in range(0, pcount):
         print i+1, d[i]
-    select = input("\nEnter the package id from the above list to be uninstalled \nType '0' to quit : ")
+    select = input("\nTo quit the package description type 'q' anytime.\nEnter the package id to be uninstalled \ntype '0' to quit: ")
     
-    if select is not 0: # If a package id is selected
+    if select is 0:
+        print ""
+    elif select is not 0:
         pkg = d[int(select-1)]
+        os.system("pacaur -Qi " + pkg + " > appname.txt")
+        os.system("most appname.txt")
         print "\n\nDo you wish to uninstall", pkg, "?"
-        confirm = raw_input("Type 'y' to continue; 'r' to read more information; 'n' to quit : ")
+        confirm = raw_input("Type 'y' to continue; 'n' to reselect; 'q' to quit : ")
         
-        if confirm == 'y': # Continue uninstalling
+        if confirm == 'y':
             os.system("notify-send -u critical Hazel 'Removing the package'")
             os.system("pacaur -Rsc " + pkg)
             os.system("notify-send -u critical Hazel 'package removed succesfully'")
         
-        elif confirm == 'r': # display more info
-            os.system("pacaur -Qi " + pkg + " > appname.txt")
-            os.system("most appname.txt")
-            os.system("rm -rf appname.txt")
+        elif confirm == 'n':
             remover(pcount, d)
         
-        elif confirm is "": # quit remover
+        elif confirm is "":
             os.system("notify-send -u critical Hazel 'Your did'nt input any value")
             return
     
     elif not select:
         os.system("notify-send -u critical Hazel 'You did'nt choose a package to remove")
-        
+        print "null"
+    
     else:
         return
-
-
 
 ##########################################################################################################################
 
@@ -252,12 +267,12 @@ def update(tokens):
     if "repo" in tokened or "repos" in tokened or "repository" in tokened or "mirrors" in tokened or "mirror" in tokened:
         print "Hazel : Updating reposirtories\n"
         os.system("sudo rm /var/lib/pacman/db.lck")
-        os.system("pacaur -Syy")
+        os.system("pacaur -Syy  --noconfirm --noedit --silent")
         os.system("notify-send -u critical Hazel 'Updated distribution reposirtories'")
     else:
         print "Hazel : Performing full system update\n"
         os.system("sudo rm /var/lib/pacman/db.lck")
-        os.system("pacaur -Syyu")
+        os.system("pacaur -Syyu --noconfirm --noedit --silent")
         os.system("notify-send -u critical Hazel 'Updated your system'")
 
 
