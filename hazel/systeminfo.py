@@ -104,7 +104,7 @@ def useracnt():
 		if not password:
 			passwd = password_generator()
 		
-		elif password == 'y':
+		elif password.lower() == 'y':
 			os.system("sudo passwd " + uname)
 		
 		else:
@@ -112,7 +112,7 @@ def useracnt():
 		
 		udetails = raw_input("Do you wish to edit personal details of this account? type 'y' or 'n' : ")
 		
-		if udetails == 'y':
+		if udetails.lower() == 'y':
 			full_name = raw_input("Enter your full name : ")
 			os.system("sudo chfn -f " + full_name + uname + " > temp")
 			print uname, "was succesfully modified and ready to use"
@@ -130,14 +130,14 @@ def adminacnt():
 		if not password:
 			passwd = password_generator()
 		
-		elif password == 'y':
+		elif password.lower() == 'y':
 			os.system("sudo passwd " + uname)
 		
 		else:
 			return
 		
 		udetails = raw_input("Do you wish to edit personal details of this account? type 'y' or 'n' : ")
-		if udetails == 'y':
+		if udetails.lower() == 'y':
 			full_name = raw_input("Enter your full name : ")
 			os.system("sudo chfn -f " + full_name + uname + " > temp")
 			print uname, "was succesfully modified and ready to use"
@@ -153,9 +153,9 @@ def password_generator():
 	pas3 = randint(10, 99)
 	passwd = str(pas)+pas1+pas2+str(pas3)
 	print "Your system password is ",passwd
-	check = raw_input("Do you wish to try another? type 'y' or 'n' : ")
+	check = raw_input("Do you wish to try another?  ")
 	
-	if check == 'y':
+	if check.lower() == 'y':
 		password_generator()
 	
 	else:
@@ -251,3 +251,21 @@ def is_connected():
         #print e
         print "Hazel : Your internet connection is off."
     return False
+
+
+def speedtest():
+    try:
+        ch = raw_input("Shall I show the result in Bytes rather than in Bits (1 Bytes = 8 Bits; 128kBps ~ 1Mbps) : ")
+        if ch.lower() == 'y' or ch.lower() == 'yes' or ch.lower() =='bytes' or ch.lower() == 'byte':
+            os.system("speedtest --bytes --simple")
+            return
+        elif ch.lower() == 'n' or ch.lower() == 'no' or ch.lower() == 'bits' or ch.lower() == 'bit':
+            os.system("speedtest --simple")
+            return
+        else:
+            print "Hazel : Whoa! what was that. Choose any of the given value."
+            speedtest()
+    
+    except Exception,e:
+        print "Hazel : I have strong feeling that you are not connected to the internet"
+

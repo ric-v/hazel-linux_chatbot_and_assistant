@@ -16,6 +16,7 @@ import datetime
 from bs4 import *
 from nltk import *
 import wikipedia as w
+from gmail import *
 from wikisearch import *
 from systeminfo import *
 from PyQt4.QtGui import *
@@ -53,14 +54,28 @@ def data(i):
 ### FUNCTION TO IMPLEMENT FUNCTIONS  OTHER THAN PACKAGE MANAGEMENT, REDIRECTED FROM MAIN() FUNCTION BELOW ###
 ### UNFORMATTED AND NEEDS A MAJOR CHANGE TO WORK AS EXPECTED, CURRENTLY IN STAGE 1 ####
 
-def others(tokens, message): # Funtion defention of Others, passed arguements are the tokenized message and original message or user input
+def others(tokens, message, unstopped_tokens): # Funtion defention of Others, passed arguements are the tokenized message and original message or user input
 
 
     ### WIKIPEDIA SEARCH ####
     
     if "search" in tokens:
-        wiki(tokens, message) 
+        wiki(tokens, message)
 
+    elif "who" in unstopped_tokens and "is" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "what" in unstopped_tokens and "is" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "look" in unstopped_tokens and "for" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "internet" in tokens and "speed" in tokens:
+        speedtest()
+
+    elif "mail" in tokens or "email" in tokens or "e-mail" in tokens:
+        mail()
 
     elif "ip" in tokens or "IP" in tokens:
         try:
@@ -102,7 +117,7 @@ def others(tokens, message): # Funtion defention of Others, passed arguements ar
 
     ### Close the application, ctrl+c or ctrl+z wont work ###
 
-    elif "close" in tokens or "q" in tokens: 
+    elif "close" in tokens or "q" in tokens or 'quit' in tokens or 'exit' in tokens: 
         exit(0)
 
 
@@ -130,14 +145,16 @@ def others(tokens, message): # Funtion defention of Others, passed arguements ar
 def main():
 
     print("\033[1;34;1m")
-    print "\n\nHazel : Hey there, type 'h' to see all options, 'q' to quit or simply start chatting with me" # Initial message shown at every startup
+    print "\n\nHazel : Hey there, type 'h' to get help or simply start chatting with me" # Initial message shown at every startup
 
     while True: # Enter the loop anyways
         print("\033[1;32;1m")
         message = raw_input("\n\nYou   : ") # recieve user input at message
-        msg = message # temporary storage of message value
-
+        message = message.lower()
+        msg = message.lower() # temporary storage of message value
+        unstopped_tokens = ""
         tokens = word_tokenize(message) # NLTK function tokenize to tokenize user input
+        unstopped_tokens = word_tokenize(message)
         d = {} # Store package names during package management
         tok = "" # Temporary variable to store tokens and to determine its value
         stop_words = set(stopwords.words('english')) # Remove stop words
@@ -290,9 +307,9 @@ def main():
                     remove(message) # call remove function in package_surfer.py
 
                 else: # If none of the above operation is triggered, it is not package management, redirect to other funtions
-                    others(tokens, message)
+                    others(tokens, message, unstopped_tokens)
             else:
-                others(tokens, message)
+                others(tokens, message, unstopped_tokens)
 
 main() # start executing the main.py file by calling main() funtion
 

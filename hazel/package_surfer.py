@@ -97,20 +97,20 @@ def installer(a):
         print "\nDo you wish to install",d[int(x-1)]," on this machine?"
         confirm = raw_input("type 'y' for yes, 'r' to read more information about the package, 'n' to quit : ")
         
-        if confirm is "y":
+        if confirm.lower() is "y":
             os.system("notify-send -u critical Hazel 'Installing package'")
             print d[int(x-1)]
             os.system("pacaur -S --force --noconfirm --noedit " + d[int(x-1)] + " > appl.txt") # Automated installation of package
             os.system("notify-send -u critical Hazel 'Succesfully installed'")
         
-        elif confirm is "r": # Display
+        elif confirm.lower() is "r": # Display
             print "\n\n"
             os.system("most appname.txt") # display package info
             os.system("rm appname.txt") # remove the display file
             installer(a) # redisplay package list
             return
         
-        elif confirm is "": # exit installation process
+        elif confirm.lower() is "": # exit installation process
             os.system("notify-send -u critical Hazel 'You didnt input a value'")
             return
         

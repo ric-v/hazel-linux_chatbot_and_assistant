@@ -27,3 +27,5 @@ Hazel enable you enjoy this freedom without having to bother about the painful l
 
 	   eg:  "Upgrade my system"
 	   	"update all apps"
+
+
