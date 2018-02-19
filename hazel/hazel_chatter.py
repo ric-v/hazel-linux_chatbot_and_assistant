@@ -25,11 +25,11 @@ def chatter(msg):
         s = i.split(":")
         d[s[0]] = s[1]
     dic = {}
-    
+
     for i in d.keys():
         seq = difflib.SequenceMatcher(None, msg, i)
         dic[i] = seq.ratio()
-    
+
     if max(dic.values()) < 0.5: # Unknown input
         print("\033[1;34;1m")
         print "Hazel : Can you  be more specific, type 'h' to get help or 'q' to quit"

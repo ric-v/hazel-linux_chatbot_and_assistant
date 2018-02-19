@@ -46,6 +46,8 @@ signal.signal(signal.SIGTSTP, sigint_handler) # handle Ctrl+Z on event
 def data(i):
     return i
 
+global callme
+callme = "there"
 
 
 ##########################################################################################################################
@@ -54,19 +56,20 @@ def data(i):
 ### FUNCTION TO IMPLEMENT FUNCTIONS  OTHER THAN PACKAGE MANAGEMENT, REDIRECTED FROM MAIN() FUNCTION BELOW ###
 ### UNFORMATTED AND NEEDS A MAJOR CHANGE TO WORK AS EXPECTED, CURRENTLY IN STAGE 1 ####
 
-def others(tokens, message, unstopped_tokens): # Funtion defention of Others, passed arguements are the tokenized message and original message or user input
+def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Others, passed arguements are the tokenized message and original message or user input
 
+    global callme
 
     ### WIKIPEDIA SEARCH ####
     
     if "search" in tokens:
         wiki(tokens, message)
 
-    elif "who" in unstopped_tokens and "is" in unstopped_tokens:
-        wiki(unstopped_tokens, message)
+    elif "date" in tokens:
+        datenow(tokens)
 
-    elif "what" in unstopped_tokens and "is" in unstopped_tokens:
-        wiki(unstopped_tokens, message)
+    elif "time" in tokens:
+        timenow(tokens)
 
     elif "look" in unstopped_tokens and "for" in unstopped_tokens:
         wiki(unstopped_tokens, message)
@@ -77,7 +80,10 @@ def others(tokens, message, unstopped_tokens): # Funtion defention of Others, pa
     elif "mail" in tokens or "email" in tokens or "e-mail" in tokens:
         mail()
 
-    elif "ip" in tokens or "IP" in tokens:
+    elif "what" in unstopped_tokens and "is" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "ip" in tokens:
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.connect(("8.8.8.8", 80))
@@ -87,6 +93,18 @@ def others(tokens, message, unstopped_tokens): # Funtion defention of Others, pa
             print "no connection"
             s.close()
 
+    elif "call" in unstopped_tokens and "me" in unstopped_tokens:
+        if callme == 'there' or not callme:
+            callme = boss()
+        else:
+            print callme
+
+    elif "my" in unstopped_tokens and "name" in unstopped_tokens:
+        if callme == "there" or not callme:
+            callme = boss()
+        else:
+            print("\033[1;34;1m")
+            print "\nHazel : ",callme
 
     elif "new" in tokens and "user" in tokens or "new" in tokens and "account" in tokens:
         adduser(tokens)
@@ -97,16 +115,13 @@ def others(tokens, message, unstopped_tokens): # Funtion defention of Others, pa
     elif "remove" in tokens and "user" in tokens or "remove" in tokens and "account" in tokens or "delete" in tokens and "user" in tokens or "delete" in tokens and "account" in tokens:
         deltuser(tokens)
 
-    elif "internet" in tokens and "active" in tokens or "internet" in tokens and "connected" in tokens:
+    elif "internet" in tokens and "active" in tokens or "internet" in tokens and "connected" in tokens or "available" in tokens:
         is_connected()
 
-    elif "date" in tokens:
-        datenow(tokens)
+    elif "who" in unstopped_tokens and "is" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
 
-    elif "time" in tokens:
-        timenow(tokens)
 
-            
     ### GOOGLE SEARCH ###
 
     elif "howto" in tokens: # googler api search to display top 10 results from google with link, links open in default browser 
@@ -133,7 +148,7 @@ def others(tokens, message, unstopped_tokens): # Funtion defention of Others, pa
     ### DEEP LEARNING MODEL NOT IMPLEMENTED YET. CURRENTLY WORKS WITH A TEXT DATABASE TO RETRIEVE AN NLP OUTPUT, THIS IS RECURSIVE CHAT AND NOT GENERATIVE AS IN DEEP LEARNING ###
 
     else:
-        chatter(message) # Function call to hazel_chatter.py, passed the original user input as asrguement
+        chatter(chat) # Function call to hazel_chatter.py, passed the original user input as asrguement
 
 
 
@@ -145,7 +160,7 @@ def others(tokens, message, unstopped_tokens): # Funtion defention of Others, pa
 def main():
 
     print("\033[1;34;1m")
-    print "\n\nHazel : Hey there, type 'h' to get help or simply start chatting with me" # Initial message shown at every startup
+    print "\n\nHazel : Hey ",callme,", type 'h' to get help or simply start chatting with me" # Initial message shown at every startup
 
     while True: # Enter the loop anyways
         print("\033[1;32;1m")
@@ -166,7 +181,7 @@ def main():
 
         filtered_list = filtered_sentence
         filtered_sentence = ' '.join(filtered_list) # Making a sentance out of the tokens
-
+        chat = message
         message = filtered_sentence # storing input in message
         tokens = word_tokenize(message) # tokenize new message
         pcount = 0 # pcount to check if package manager search result is null or greater than 1
@@ -307,9 +322,9 @@ def main():
                     remove(message) # call remove function in package_surfer.py
 
                 else: # If none of the above operation is triggered, it is not package management, redirect to other funtions
-                    others(tokens, message, unstopped_tokens)
+                    others(tokens, message, unstopped_tokens, chat)
             else:
-                others(tokens, message, unstopped_tokens)
+                others(tokens, message, unstopped_tokens, chat)
 
 main() # start executing the main.py file by calling main() funtion
 

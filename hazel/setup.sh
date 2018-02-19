@@ -10,7 +10,7 @@ rm -rf nltk_data/
 
 mv nltk_data/nltk_data/ ~/
 
-sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fakeroot gnome-terminal pacaur
+sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fakeroot gnome-terminal pacaur dialog
 
 #sudo pacman -U --force --noconfirm co*.tar.xz
 #sudo pacman -U --force --noconfirm p*.tar.xz
