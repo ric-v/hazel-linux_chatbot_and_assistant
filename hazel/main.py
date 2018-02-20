@@ -128,6 +128,8 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     elif "who" in unstopped_tokens and "is" in unstopped_tokens or "who" in unstopped_tokens and "was" in unstopped_tokens:
         wiki(unstopped_tokens, message)
 
+    elif "execute" in tokens and "commands" in tokens:
+        os.system("gnome-terminal")
 
     ### GOOGLE SEARCH ###
 
@@ -140,8 +142,8 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     ### Close the application, ctrl+c or ctrl+z wont work ###
 
     elif "close" in tokens or "q" in tokens or 'quit' in tokens or 'exit' in tokens: 
-        exit(0)
-
+        os.system("rm appname.txt appl.txt temp.txt")
+        quit()
 
     ### OPEN FILE MANAGER ###
     ### CURRENTLY SUPPORTS OPENING TEXT FILES OR PROGRAMMING FILES ###
