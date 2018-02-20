@@ -13,19 +13,38 @@ Hazel enable you enjoy this freedom without having to bother about the painful l
 	a) Install a new package/software from the official repository:
 		Installs software and packages from official repositories provided by the linux distribution (Manjaro Linux) and also utilizes the AUR repository for a wider range of applications and tries to automate the process so that users have the least to bother about package management. Some keywords and easy ways to perform this task are shown below. Besides these, Hazel analyzes the context of your input and work accordingly
 		
-	   eg:  "can you install firefox"
-		"install google chrome"
+		eg: "can you install firefox"
+		    "install google chrome"
 
 	b) Uninstall or remove a software package:
 		To remove a package from your device hazel analyzes whether it is installed, if installed it is removed completely along with all dependancies with no user interaction
 
-	   eg:  "remove audacious"
-		"delete gnome music from my system"
+	   	eg: "remove audacious"
+		    "delete gnome music from my system"
 
 	c) Updating your system and applications:
 		Hazel updates your OS and all applications installed along side to latest version after user authorizes it to do so.
 
-	   eg:  "Upgrade my system"
-	   	"update all apps"
+	   	eg:  "Upgrade my system"
+	   	     "update all apps"
 
+2. Wikipedia Search:
+    	Ask Hazel about anything and everything, she can talk about famous personnels, films, places, culture, organizations, and what not! Start by asking Hazel about something in a question format and get relevent results. Remember that these are not google search and hence user input must be specific since there may be more than 1 result for a single input. The more accurate your input is, the more accurate will be the reply.
 
+		eg: "Who is Linus torvalds"
+	    	    "What is Arch linux"
+	            "Tell me about Indian culture"
+
+3. Web search :
+	Search the web to get details of getting things done in your linux systems or for programming. The websearch is powered by SoCLI which provides a CLI based front for Stack Overflow web-pages.
+		eg: "How to open terminal in full screen"
+		    "How to write hello world program in go language"
+
+4. User Management:
+	This is part of the system configurations. Manage users in your system. You may Create a new user/admin, Remove existing members or view existing users in list
+
+    		eg: "Add a new user"
+		    "Remove a user"
+		    "List all users"
+
+ 

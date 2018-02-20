@@ -23,7 +23,7 @@ from PyQt4.QtGui import *
 from wikiapi import WikiApi
 from hazel_chatter import *
 from package_surfer import *
-from fileoperations import *
+#from fileoperations import *
 from textblob import TextBlob
 from nltk.corpus import stopwords
 from difflib import SequenceMatcher
@@ -33,12 +33,10 @@ from vocabulary.vocabulary import Vocabulary as vb
 
 ##########################################################################################################################
 
-
-
 ### FUNCTION TO HANDLE EVENTS SUCH AS ctrl+C OR ctrl+Z TO PREVENT THE PROGRAM FROM TERMINATION ###
 
 def sigint_handler(signum, frame):
-    print '' # Display message on occurance of below events
+    print ('') # Display message on occurance of below events
 
 signal.signal(signal.SIGINT, sigint_handler) # handle Ctrl+C on event
 signal.signal(signal.SIGTSTP, sigint_handler) # handle Ctrl+Z on event
@@ -62,8 +60,11 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
 
     ### WIKIPEDIA SEARCH ####
     
-    if "search" in tokens:
-        wiki(tokens, message)
+    if "tell" in unstopped_tokens and "about" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "tell" in unstopped_tokens and "more" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
 
     elif "date" in tokens:
         datenow(tokens)
@@ -80,6 +81,9 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     elif "mail" in tokens or "email" in tokens or "e-mail" in tokens:
         mail()
 
+    elif "how" in unstopped_tokens and "to" in unstopped_tokens:
+        socli(chat, unstopped_tokens)
+
     elif "what" in unstopped_tokens and "is" in unstopped_tokens:
         wiki(unstopped_tokens, message)
 
@@ -87,24 +91,27 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.connect(("8.8.8.8", 80))
-            print "Hazel : Your current IP address is", s.getsockname()[0]
+            print("Hazel : Your current IP address is", s.getsockname()[0])
             s.close()
-        except Exception,e:
-            print "no connection"
+        except Exception as e:
+            print("no connection")
             s.close()
 
     elif "call" in unstopped_tokens and "me" in unstopped_tokens:
         if callme == 'there' or not callme:
             callme = boss()
         else:
-            print callme
+            print(callme)
 
     elif "my" in unstopped_tokens and "name" in unstopped_tokens:
         if callme == "there" or not callme:
             callme = boss()
         else:
             print("\033[1;34;1m")
-            print "\nHazel : ",callme
+            print("\nHazel : ",callme)
+
+    elif "existing" in tokens and "users" in tokens or "list" in tokens and "users" in tokens:
+        list_users(tokens)
 
     elif "new" in tokens and "user" in tokens or "new" in tokens and "account" in tokens:
         adduser(tokens)
@@ -118,7 +125,7 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     elif "internet" in tokens and "active" in tokens or "internet" in tokens and "connected" in tokens or "available" in tokens:
         is_connected()
 
-    elif "who" in unstopped_tokens and "is" in unstopped_tokens:
+    elif "who" in unstopped_tokens and "is" in unstopped_tokens or "who" in unstopped_tokens and "was" in unstopped_tokens:
         wiki(unstopped_tokens, message)
 
 
@@ -126,7 +133,7 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
 
     elif "howto" in tokens: # googler api search to display top 10 results from google with link, links open in default browser 
         cmd = "googler"
-        print "To quit the search results, type q"
+        print("To quit the search results, type q")
         os.system(cmd + " " + message) # perform command in shell
 
 
@@ -160,11 +167,11 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
 def main():
 
     print("\033[1;34;1m")
-    print "\n\nHazel : Hey ",callme,", type 'h' to get help or simply start chatting with me" # Initial message shown at every startup
+    print("\n\nHazel : Hey ",callme,", type 'h' to get help or simply start chatting with me") # Initial message shown at every startup
 
     while True: # Enter the loop anyways
         print("\033[1;32;1m")
-        message = raw_input("\n\nYou   : ") # recieve user input at message
+        message = input("\n\nYou   : ") # recieve user input at message
         message = message.lower()
         msg = message.lower() # temporary storage of message value
         unstopped_tokens = ""
@@ -249,7 +256,7 @@ def main():
                     tokened.remove("uninstall")
 
                 elif "upgrade" in tokened:
-                    print tok
+                    print(tok)
                     if "system" in tokened:
                         i = i + 1
                         tok = "upgrade"
@@ -263,11 +270,11 @@ def main():
                         tok = "upgrade"
                         tokened.remove("apps")
                     tokened.remove("upgrade")
-                    print "\nSystem updater\n"
+                    print("\nSystem updater\n")
                     update(message) # call update function in package_surfer.py
 
                 elif "update" in tokened:
-                    print tok
+                    print(tok)
                     if "system" in tokened:
                         i = i + 1
                         tok = "upgrade"
@@ -281,7 +288,7 @@ def main():
                         tok = "upgrade"
                         tokened.remove("apps")
                     tokened.remove("update")
-                    print "\nSystem updater\n"
+                    print("\nSystem updater\n")
                     update(message) # call update function in package_surfer.py
 
 
@@ -313,12 +320,12 @@ def main():
             if pcount > 0: # if atleast 1 package exists in repo_app_list.txt
                 print("\033[1;34;1m")
 
-                if "install" is tok: # tok is install
-                    print "\nPackage Installer\n"
+                if "install" == tok: # tok is install
+                    print("\nPackage Installer\n")
                     install(message) # call install function in package_surfer.py
 
                 elif "remove" == tok: # tok is remove
-                    print "\nPackage Remover\n"
+                    print("\nPackage Remover\n")
                     remove(message) # call remove function in package_surfer.py
 
                 else: # If none of the above operation is triggered, it is not package management, redirect to other funtions

@@ -1,13 +1,16 @@
 import os,sys,subprocess,shutil
-import tkFileDialog
-from Tkinter import *
-root=Tk()
+from tkinter import filedialog
+import tkinter as tk
+import TkMessageBox
+from tkinter.filedialog import askopenfilename
+
+root = tk.Tk()
 root.withdraw()
 from tkMessageBox import *
 def create(filename):
     showinfo("Warning","Path to create the file")
     path=tkFileDialog.askdirectory()
-    print path+"/"+filename+".txt"
+    print(path+"/"+filename+".txt")
     f=open(path+"/"+filename+".txt",'w+')
     f.close()
 def openfiles():
@@ -51,13 +54,13 @@ def remove():
 def createf(data):
     showinfo("Warning","Path to create the folder")
     path=tkFileDialog.askdirectory()
-    print path+"/"+data
+    print(path+"/"+data)
     os.mkdir(path+"/"+data)
 def lstdir():
     showinfo("Warning","Path to display the folder contents")
     path=tkFileDialog.askdirectory()
     s=os.listdir(path)
-    print "Folder Contents"
-    print20*"*"
+    print("Folder Contents")
+    print(20*"*")
     for i in s:
-        print i
+        print(i)

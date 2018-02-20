@@ -32,11 +32,11 @@ def chatter(msg):
 
     if max(dic.values()) < 0.5: # Unknown input
         print("\033[1;34;1m")
-        print "Hazel : Can you  be more specific, type 'h' to get help or 'q' to quit"
+        print("Hazel : Can you  be more specific, type 'h' to get help or 'q' to quit")
 
     else: # Reply to known input
         print("\033[1;34;1m")
-        print "Hazel :", d[max(dic.iteritems(), key=operator.itemgetter(1))[0]]
+        print("Hazel :", d[max(dic.iteritems(), key=operator.itemgetter(1))[0]])
 
 
 

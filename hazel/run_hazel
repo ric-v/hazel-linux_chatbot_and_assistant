@@ -1,0 +1,3 @@
+#! /bin/bash
+
+python2 ~/projects/hazel/hazel-linux_chatbot_and_assistant/hazel/main.py

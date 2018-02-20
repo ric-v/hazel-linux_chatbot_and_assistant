@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Hazel
+Comment=Linux chatbot and system assistant
+Exec=hazel
+Terminal=false
+Type=Application
+Encoding=UTF-8
+Icon=/home/illuminati/projects/hazel/hazel-linux_chatbot_and_assistant/hazel/hazel.png
+Categories=System;TerminalEmulator;
+Keywords=shell;prompt;command;commandline;cmd;
+Name[en_IN]=Hazel
+Comment[en_IN]=Assistive chatbot for linux system

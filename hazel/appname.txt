@@ -1,0 +1,22 @@
+Repository      : extra
+Name            : firefox
+Version         : 58.0.2-1.1
+Description     : Standalone web browser from mozilla.org
+Architecture    : x86_64
+URL             : https://www.mozilla.org/firefox/
+Licenses        : MPL  GPL  LGPL
+Groups          : None
+Provides        : None
+Depends On      : gtk3  gtk2  mozilla-common  libxt  startup-notification  mime-types  dbus-glib  ffmpeg  nss  hunspell  sqlite  ttf-font  libpulse
+Optional Deps   : networkmanager: Location detection via available WiFi networks
+                  libnotify: Notification integration
+                  pulseaudio: Audio support
+                  speech-dispatcher: Text-to-Speech
+Conflicts With  : None
+Replaces        : firefox-kde
+Download Size   : 37.30 MiB
+Installed Size  : 142.47 MiB
+Packager        : Philip Mueller <philm@manjaro.org>
+Build Date      : Wednesday 14 February 2018 01:01:00 PM IST
+Validated By    : MD5 Sum  SHA-256 Sum  Signature
+
