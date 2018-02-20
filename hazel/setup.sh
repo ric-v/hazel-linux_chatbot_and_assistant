@@ -10,6 +10,9 @@ rm -rf nltk_data/
 
 mv nltk_data/nltk_data/ ~/
 
+sudo mv hazel /usr/bin/
+sudo mv Hazel.desktop /usr/share/applications/
+
 sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fakeroot gnome-terminal pacaur dialog
 
 #sudo pacman -U --force --noconfirm co*.tar.xz
