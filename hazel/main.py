@@ -14,6 +14,7 @@ import psutil
 import random
 import getpass
 import difflib
+import getpass
 import readline
 import operator
 import platform
@@ -196,8 +197,6 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     ### Close the application, ctrl+c or ctrl+z wont work ###
 
     elif "close" in tokens or "q" in tokens or 'quit' in tokens or 'exit' in tokens:
-        os.system("sudo cat /temp/history.txt >> /opt/hazel-linux_chatbot_and_assistant/hazel/history.txt")
-        os.system("sudo rm -rf appl.txt appname.txt")
         exit(0)
 
     ### OPEN FILE MANAGER ###
@@ -224,7 +223,7 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
 def main():
 
     print("\033[1;34;1m")
-    print("\n\nHazel : Hey ",callme,", type 'h' to get help or simply start chatting with me") # Initial message shown at every startup
+    print("\n\n\nHazel : Hey ",callme,", type 'h' to get help or simply start chatting with me") # Initial message shown at every startup
     
     SQLCompleter = WordCompleter(['install', 'uninstall', 'update', 'upgrade', 'who is', 'what is', 'quit', 'google', 'check internet connection', 'my ip address', 'my name', 'send email', 'internet speed', 'date today', 'time now', 'change date', 'change time', 'battery status'],
                              ignore_case=True)

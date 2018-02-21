@@ -1,4 +1,5 @@
 hello:hi
+hi:hello
 good morning:Good morning
 are you pregnent:Huh! I wish you were
 hey there:hellooo there
