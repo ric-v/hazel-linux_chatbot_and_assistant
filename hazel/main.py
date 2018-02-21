@@ -195,7 +195,9 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
 
     ### Close the application, ctrl+c or ctrl+z wont work ###
 
-    elif "close" in tokens or "q" in tokens or 'quit' in tokens or 'exit' in tokens: 
+    elif "close" in tokens or "q" in tokens or 'quit' in tokens or 'exit' in tokens:
+        os.system("sudo cat /temp/history.txt >> /opt/hazel-linux_chatbot_and_assistant/hazel/history.txt")
+        os.system("sudo rm -rf appl.txt appname.txt")
         exit(0)
 
     ### OPEN FILE MANAGER ###
@@ -230,7 +232,7 @@ def main():
     while True: # Enter the loop anyways
         print("\033[1;32;1m")
         message =   prompt('\nYou   : ',
-                        history=FileHistory('/opt/hazel-linux_chatbot_and_assistant/hazel/history.txt'),
+                        history=FileHistory('/tmp/history.txt'),
                         auto_suggest=AutoSuggestFromHistory(),
                         completer=SQLCompleter,
                         )

@@ -1,3 +1,3 @@
 #! /bin/bash
 
-xfce4-terminal --command '/opt/hazel-linux_chatbot_and_assistant/hazel/main.py'
+gnome-terminal --full-screen --command '/opt/hazel-linux_chatbot_and_assistant/hazel/main.py'
