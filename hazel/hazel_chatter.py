@@ -17,7 +17,7 @@ d = {}
 ### CHAT DATA AND FUNCTION - performs normal chat to user input ###
 
 def chatter(msg):
-    f = open("db.TXT", "r")
+    f = open("/opt/hazel-linux_chatbot_and_assistant/hazel/db.TXT", "r")
     data = f.readlines()
 
     for i in data:
@@ -36,7 +36,7 @@ def chatter(msg):
 
     else: # Reply to known input
         print("\033[1;34;1m")
-        print("Hazel :", d[max(dic.iteritems(), key=operator.itemgetter(1))[0]])
+        print("Hazel :", d[max(dic.items(), key=operator.itemgetter(1))[0]])
 
 
 

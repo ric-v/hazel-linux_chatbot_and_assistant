@@ -7,10 +7,10 @@ google-api
 pygame 
 mutagen
 vocabulary
-#tk
 scrapy
 textblob
-#tensorflow-gpu>=1.4.0
-
-#pyqt4
-#python-tk
+getpass
+socket
+readline
+wikiapi
+psutil

@@ -4,14 +4,19 @@
 
 ### Importing important python packages required by Hazel ###
 
+from __future__ import print_function
 import os
 import sys
 import time
 import socket
 import signal
+import psutil
 import random
+import getpass
 import difflib
+import readline
 import operator
+import platform
 import datetime
 from bs4 import *
 from nltk import *
@@ -19,17 +24,21 @@ import wikipedia as w
 from gmail import *
 from wikisearch import *
 from systeminfo import *
-from PyQt4.QtGui import *
 from wikiapi import WikiApi
 from hazel_chatter import *
 from package_surfer import *
 #from fileoperations import *
 from textblob import TextBlob
 from nltk.corpus import stopwords
+from prompt_toolkit import prompt
+from collections import *
+#from collections import OrderedDict
 from difflib import SequenceMatcher
 from nltk.tokenize import word_tokenize
+from prompt_toolkit.history import FileHistory
 from vocabulary.vocabulary import Vocabulary as vb
-
+from prompt_toolkit.contrib.completers import WordCompleter
+from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 
 ##########################################################################################################################
 
@@ -66,14 +75,45 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     elif "tell" in unstopped_tokens and "more" in unstopped_tokens:
         wiki(unstopped_tokens, message)
 
+    elif "change" in tokens and "date" in tokens:
+        set_date()
+
     elif "date" in tokens:
         datenow(tokens)
 
     elif "time" in tokens:
         timenow(tokens)
 
+    elif "my" in unstopped_tokens and "username" in unstopped_tokens or "my" in unstopped_tokens and "user" in unstopped_tokens and "name" in unstopped_tokens:
+        if "change" in tokens:
+            socli(chat, unstopped_tokens)
+        username = getpass.getuser()
+        print("\nHazel : Your username on this system is ",username)
+
     elif "look" in unstopped_tokens and "for" in unstopped_tokens:
         wiki(unstopped_tokens, message)
+
+    elif "battery" in tokens and "status" in tokens or "battery" in tokens and "charge" in tokens or "battery" in tokens and "status" in tokens:
+        battery = psutil.sensors_battery()
+        plugged = battery.power_plugged
+        percent = str(battery.percent)
+        if plugged==False: plugged="Not Plugged In"
+        else: plugged="Plugged In"
+        print("\nHazel : Your battery percentage is ", percent + "% | " + plugged)
+
+    elif "ram" in unstopped_tokens and "usage" in unstopped_tokens or "ram" in tokens and "available" in tokens or "ram" in unstopped_tokens and "used" in unstopped_tokens:
+        print("\033[1;34;1m")
+        mem=str(os.popen('free -t -m').readlines())
+        T_ind=mem.index('T')
+        mem_G=mem[T_ind+14:-4]
+        S1_ind=mem_G.index(' ')
+        mem_T=mem_G[0:S1_ind]
+        mem_G1=mem_G[S1_ind+8:]
+        S2_ind=mem_G1.index(' ')
+        mem_U=mem_G1[0:S2_ind]
+        mem_F=mem_G1[S2_ind+8:]
+        print('Total Memory = ' + mem_T + ' MB')    
+        print('Free Memory = ' + mem_F + ' MB')
 
     elif "internet" in tokens and "speed" in tokens:
         speedtest()
@@ -84,18 +124,25 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     elif "how" in unstopped_tokens and "to" in unstopped_tokens:
         socli(chat, unstopped_tokens)
 
-    elif "what" in unstopped_tokens and "is" in unstopped_tokens:
-        wiki(unstopped_tokens, message)
+    elif "how" in unstopped_tokens and "can" in unstopped_tokens and "i" in unstopped_tokens:
+        socli(chat, unstopped_tokens)
 
-    elif "ip" in tokens:
+    elif "how" in unstopped_tokens and "will" in unstopped_tokens and "i" in unstopped_tokens:
+        socli(chat, unstopped_tokens)
+
+    elif "my" in unstopped_tokens and "ip" in tokens or "my" in unstopped_tokens and "network" in tokens and "address" in tokens or "system" in tokens and "ip" in tokens:
         try:
+            print("\033[1;34;1m")
             s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             s.connect(("8.8.8.8", 80))
-            print("Hazel : Your current IP address is", s.getsockname()[0])
+            print("\nHazel : Your current IP address is", s.getsockname()[0])
             s.close()
         except Exception as e:
             print("no connection")
             s.close()
+
+    elif "what" in unstopped_tokens and "is" in unstopped_tokens and "my" not in unstopped_tokens:
+        wiki(unstopped_tokens, message)
 
     elif "call" in unstopped_tokens and "me" in unstopped_tokens:
         if callme == 'there' or not callme:
@@ -109,6 +156,15 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
         else:
             print("\033[1;34;1m")
             print("\nHazel : ",callme)
+
+    elif "memory" in unstopped_tokens and "usage" in tokens or"memory" in tokens and "available" in tokens or "storage" in tokens and "space" in tokens or "harddisk" in tokens and "space" in tokens and "left" in tokens:
+        meminfo()
+
+    elif "Which" in tokens and "os" in tokens and "i" in tokens or "Which" in tokens and "operating system" in tokens and "i" in tokens:
+        platform.linux_distribution()
+
+    elif "my" in unstopped_tokens and "os" in tokens or "os" in tokens and "using" in tokens or "operating system" in tokens and "using" in tokens:
+        platform.linux_distribution()
 
     elif "existing" in tokens and "users" in tokens or "list" in tokens and "users" in tokens:
         list_users(tokens)
@@ -128,12 +184,10 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     elif "who" in unstopped_tokens and "is" in unstopped_tokens or "who" in unstopped_tokens and "was" in unstopped_tokens:
         wiki(unstopped_tokens, message)
 
-    elif "execute" in tokens and "commands" in tokens:
-        os.system("gnome-terminal")
 
     ### GOOGLE SEARCH ###
 
-    elif "howto" in tokens: # googler api search to display top 10 results from google with link, links open in default browser 
+    elif "google" in tokens: # googler api search to display top 10 results from google with link, links open in default browser 
         cmd = "googler"
         print("To quit the search results, type q")
         os.system(cmd + " " + message) # perform command in shell
@@ -142,8 +196,7 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     ### Close the application, ctrl+c or ctrl+z wont work ###
 
     elif "close" in tokens or "q" in tokens or 'quit' in tokens or 'exit' in tokens: 
-        os.system("rm appname.txt appl.txt temp.txt")
-        quit()
+        exit(0)
 
     ### OPEN FILE MANAGER ###
     ### CURRENTLY SUPPORTS OPENING TEXT FILES OR PROGRAMMING FILES ###
@@ -170,10 +223,17 @@ def main():
 
     print("\033[1;34;1m")
     print("\n\nHazel : Hey ",callme,", type 'h' to get help or simply start chatting with me") # Initial message shown at every startup
+    
+    SQLCompleter = WordCompleter(['install', 'uninstall', 'update', 'upgrade', 'who is', 'what is', 'quit', 'google', 'check internet connection', 'my ip address', 'my name', 'send email', 'internet speed', 'date today', 'time now', 'change date', 'change time', 'battery status'],
+                             ignore_case=True)
 
     while True: # Enter the loop anyways
         print("\033[1;32;1m")
-        message = input("\n\nYou   : ") # recieve user input at message
+        message =   prompt('\nYou   : ',
+                        history=FileHistory('/opt/hazel-linux_chatbot_and_assistant/hazel/history.txt'),
+                        auto_suggest=AutoSuggestFromHistory(),
+                        completer=SQLCompleter,
+                        )
         message = message.lower()
         msg = message.lower() # temporary storage of message value
         unstopped_tokens = ""
@@ -204,7 +264,7 @@ def main():
 
         if "h" in tokens: # Print the help.txt file to read the description and manual page of Hazel
             print("\033[1;37;1m")
-            os.system("most help.txt") # Using 'most' command to print in pages
+            os.system("most /opt/hazel-linux_chatbot_and_assistant/hazel/help.txt") # Using 'most' command to print in pages 
 
         elif "h" not in tokens: # if not h, go through package list anyways to ckeck if user have mentioned the name of a package in the chat input
 
@@ -244,14 +304,6 @@ def main():
                     tok = "remove"
                     tokened.remove("remove")
 
-                elif "get" in tokened: # here, 'get rid' means to remove but 'get' alone means to install
-                    if "rid" in tokened:
-                        i = i + 1
-                        tok = "remove"
-                        tokened.remove("rid")
-                        break
-                    tok = "install"
-                    tokened.remove("get")
 
                 elif "uninstall" in tokened:
                     tok = "remove"
@@ -272,7 +324,6 @@ def main():
                         tok = "upgrade"
                         tokened.remove("apps")
                     tokened.remove("upgrade")
-                    print("\nSystem updater\n")
                     update(message) # call update function in package_surfer.py
 
                 elif "update" in tokened:
@@ -290,7 +341,6 @@ def main():
                         tok = "upgrade"
                         tokened.remove("apps")
                     tokened.remove("update")
-                    print("\nSystem updater\n")
                     update(message) # call update function in package_surfer.py
 
 
@@ -311,12 +361,12 @@ def main():
             ### ENTERING PACKAGE NAME CROSS CHECKING WITH THE ONES IN THE DISTRIBUTION REPOSITORIES ###
 
             for j in range(0, len(tokened)):
-                with open('repo_app_list.txt','r') as f: # Open repo_app_list.txt which contains the list of all possible packages that can be installed on this Linux
+                with open('/opt/hazel-linux_chatbot_and_assistant/hazel/repo_app_list.txt','r') as f: # Open repo_app_list.txt which contains the list of all possible packages that can be installed on this Linux
                     for line in f:
                         liner = line.strip() # remove white spaces
                         matcher = SequenceMatcher(None, liner, tokened[j]).ratio() # Match the list element with input term to see if a package has atleast 50% similar name as with the package in the repository
 
-                        if matcher >= 0.9: # if a package with >= 50% match is found, it is listed later
+                        if matcher >= 0.75: # if a package with >= 50% match is found, it is listed later
                             pcount = pcount + 1 # updates pcount since a package with match is found
 
             if pcount > 0: # if atleast 1 package exists in repo_app_list.txt
@@ -335,7 +385,12 @@ def main():
             else:
                 others(tokens, message, unstopped_tokens, chat)
 
-main() # start executing the main.py file by calling main() funtion
+if __name__ == "__main__":
+    main()
+else:
+    print("hell")
+
+#main() # start executing the main.py file by calling main() funtion
 
 
 

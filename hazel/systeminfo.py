@@ -174,8 +174,6 @@ def password_generator():
     else:
         return passwd
 
-
-
 def deltuser(tokens):
     print("\033[1;34;1m")
     print("\n\n")
@@ -261,7 +259,7 @@ def chpasswd(tokens):
 
 def list_users(tokens):
     print("\033[1;34;1m")
-    print("\n")
+    print("\nHazel : Users in this systme are : ")
     os.system("ls /home")
 
 def is_connected():
@@ -310,3 +308,29 @@ def boss():
         callme = input("\n       Tell me your name : ")
     print("\nHazel : Hello ", callme," I hope you are enjoying my company so far!")
     return callme
+
+def meminfo():
+    print("\033[1;34;1m")
+    meminfo=OrderedDict()
+
+    with open('/proc/meminfo') as f:
+        for line in f:
+            meminfo[line.split(':')[0]] = line.split(':')[1].strip()
+
+    print('\nHazel : Total memory: {0}'.format(meminfo['MemTotal']))
+    print('        Free memory: {0}'.format(meminfo['MemFree']))
+
+
+def set_date():
+    print("\033[1;34;1m")
+    #hr = datetime.datetime.now().strftime('%H')
+    #mn = datetime.datetime.now().strftime('%M')
+    #sec = datetime.datetime.now().strftime('%S')
+    #print("\nHazel : Current system time is : ", hr,":",mn,":",sec)
+    print("\nHazel : Current date is : ", datetime.datetime.now())
+    year = input("\nEnter the year as YYYY : ")
+    month = input("Enter the month as MM : ")
+    date = input("Enter the date as DD : ")
+    date_change = year+"-"+month+"-"+date
+    print(date_change)
+    os.system("timedatectl set-time " + date_change)

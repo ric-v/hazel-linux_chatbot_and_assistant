@@ -22,6 +22,7 @@ pop-icon-theme-git
 pycharm-professional
 python2-twodict-git
 sublime-text-dev
+teamviewer
 vimix-gtk-themes-git
 vimix-icon-theme
 webstorm
@@ -44,9 +45,11 @@ alsa-utils
 android-tools
 apache
 apm
+appstream-glib
 apr
 apr-util
 arandr
+archlinux-appstream-data
 archlinux-keyring
 argon2
 artwork-i3
@@ -102,6 +105,7 @@ celt
 cheese
 chromaprint
 chrome-gnome-shell
+chromium
 cifs-utils
 ckbcomp
 clucene
@@ -254,6 +258,7 @@ fzf
 garcon
 gawk
 gc
+gcab
 gcc
 gcc-libs
 gcolor2
@@ -292,6 +297,7 @@ gnome-bluetooth
 gnome-calculator
 gnome-color-manager
 gnome-common
+gnome-control-center
 gnome-desktop
 gnome-disk-utility
 gnome-font-viewer
@@ -300,6 +306,7 @@ gnome-icon-theme-symbolic
 gnome-keyring
 gnome-logs
 gnome-menus
+gnome-online-accounts
 gnome-screenshot
 gnome-session
 gnome-settings-daemon
@@ -470,6 +477,7 @@ lib32-alsa-lib
 lib32-alsa-plugins
 lib32-attr
 lib32-bzip2
+lib32-dbus
 lib32-expat
 lib32-flex
 lib32-fontconfig
@@ -492,10 +500,12 @@ lib32-libglvnd
 lib32-libgpg-error
 lib32-libice
 lib32-libjpeg-turbo
+lib32-libjpeg6-turbo
 lib32-libnl
 lib32-libpcap
 lib32-libpciaccess
 lib32-libpng
+lib32-libpng12
 lib32-libsm
 lib32-libtiff
 lib32-libusb
@@ -508,12 +518,14 @@ lib32-libxdmcp
 lib32-libxext
 lib32-libxfixes
 lib32-libxi
+lib32-libxinerama
 lib32-libxml2
 lib32-libxmu
 lib32-libxrandr
 lib32-libxrender
 lib32-libxshmfence
 lib32-libxt
+lib32-libxtst
 lib32-libxxf86vm
 lib32-llvm-libs
 lib32-lm_sensors
@@ -804,6 +816,7 @@ libxvmc
 libxxf86dga
 libxxf86misc
 libxxf86vm
+libyaml
 libytnef
 libzip
 libzmf
@@ -959,6 +972,7 @@ pacman
 pacman-mirrors
 pacui
 pam
+pamac
 pambase
 pango
 pangomm

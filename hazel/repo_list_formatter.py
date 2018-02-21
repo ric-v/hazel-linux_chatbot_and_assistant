@@ -26,7 +26,7 @@ def formatter():
 	os.system('wget -P "." "https://aur.archlinux.org/packages.gz" &>/dev/null && gunzip -f "packages.gz" | sort packages > all_apps_unformated.txt') # List AUR packages
 	os.system('sudo pacaur -Qq >> all_apps_unformated.txt') # List official repo packages
 
-	with open('all_apps_unformated.txt', 'r') as f, open('repo_app_list.txt', 'w') as fo: # Format the input list
+	with open('/opt/hazel-linux_chatbot_and_assistant/hazel/all_apps_unformated.txt', 'r') as f, open('/opt/hazel-linux_chatbot_and_assistant/hazel/repo_app_list.txt', 'w') as fo: # Format the input list
 		for line in f:#
 			tokens = word_tokenize(line)
 			fo.write("\n")

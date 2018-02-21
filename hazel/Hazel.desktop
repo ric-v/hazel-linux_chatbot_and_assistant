@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Hazel
 Comment=Linux chatbot and system assistant
-Exec=hazel
+Exec=/opt/hazel-linux_chatbot_and_assistant/hazel/hazel
 Terminal=false
 Type=Application
 Encoding=UTF-8

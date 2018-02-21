@@ -99,7 +99,7 @@ def installer(a):
         if confirm.lower() == "y":
             os.system("notify-send -u critical Hazel 'Installing package'")
             print(d[int(x-1)])
-            os.system("pacaur -S --force --noconfirm --noedit " + d[int(x-1)] + " > appl.txt") # Automated installation of package
+            os.system("pacaur -S --force --noconfirm --noedit " + d[int(x-1)]) # Automated installation of package
             os.system("notify-send -u critical Hazel 'Succesfully installed'")
 
         elif confirm.lower() == "r": # Display
@@ -219,6 +219,7 @@ def remove(tokens):
 
 
 def remover(pc, d):
+    print("\033[1;34;1m")
     pcount = pc
 
     for i in range(0, pcount):
@@ -262,16 +263,21 @@ def remover(pc, d):
 ### PACKAGE UPDATER - update package or system ####
 
 def update(tokens):
+    print("\033[1;34;1m")
+    pacmandb = os.path.isfile("/var/lib/pacman/db.lck")
+    if pacmandb is False:
+        print("")
+
+    elif pacmandb is True:
+        os.system("sudo rm /var/lib/pacman/db.lck") # Unlock package manager
     tokened = word_tokenize(tokens)
     if "repo" in tokened or "repos" in tokened or "repository" in tokened or "mirrors" in tokened or "mirror" in tokened:
         print("Hazel : Updating reposirtories\n")
-        os.system("sudo rm /var/lib/pacman/db.lck")
         os.system("pacaur -Syy  --noconfirm --noedit --silent")
         os.system("notify-send -u critical Hazel 'Updated distribution reposirtories'")
 
     else:
         print("Hazel : Performing full system update\n")
-        os.system("sudo rm /var/lib/pacman/db.lck")
         os.system("pacaur -Syyu --noconfirm --noedit --silent")
         os.system("notify-send -u critical Hazel 'Updated your system'")
 
