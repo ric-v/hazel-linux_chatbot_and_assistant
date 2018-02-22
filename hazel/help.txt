@@ -38,7 +38,7 @@ Hazel enable you enjoy this freedom without having to bother about the painful l
 3. Web search :
 	Search the web to get details of getting things done in your linux systems or for programming. The websearch is powered by SoCLI which provides a CLI based front for Stack Overflow web-pages.
 		eg: "How to open terminal in full screen"
-		    "How to write hello world program in go language"
+		    "How can i write hello world program in go language"
 
 4. User Management:
 	This is part of the system configurations. Manage users in your system. You may Create a new user/admin, Remove existing members or view existing users in list
@@ -47,4 +47,6 @@ Hazel enable you enjoy this freedom without having to bother about the painful l
 		    "Remove a user"
 		    "List all users"
 
- 
+ 5. Send E-mail:
+ 	You can send e-mail to anyone or any mailing service available from your Google mail. You may face error while sending mail the first time, that can be corrected by visiting https://myaccount.google.com/lesssecureapps and enabling the option. This happens due to recent changes in Gmail. 
+ 		eg: "Send an email"

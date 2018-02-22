@@ -10,17 +10,12 @@ rm -rf nltk_data/
 
 mv nltk_data/nltk_data/ /usr/share/
 
-sudo cp hazel /usr/bin/
-sudo cp Hazel.desktop /usr/share/applications/
+sudo cp -rf hazel /usr/bin/
+sudo cp -rf Hazel.desktop /usr/share/applications/
 
 sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fakeroot gnome-terminal pacaur dialog
 
 pip2 install -r requirements.txt
-
-
-mkdir .local/share/applications
-
-mv -f hazel.desktop.desktop ~/.local/share/applications/
 
 echo "
 

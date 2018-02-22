@@ -5,6 +5,7 @@ are you pregnent:Huh! I wish you were
 hey there:hellooo there
 hi hazel:yes speaking.
 what are you eating:Bits and bytes of input
+setup my mail:there's nothing to setup. You can directly start sending email by typing "send a new mail"
 what was the most craziest thing you did:talked to humans
 how crazy are you:As much as required
 Do you think:Guess what. I just did

@@ -63,15 +63,17 @@ def socli(chat, tokens):
             tokens.remove("how")
             tokens.remove("to")
         query = ""
+        tag = "linux"
         for i in range(0, len(tokens)):
             query = query + str(tokens[i]) + " " 
-        print("\nHazel : Do you want to search on \" How to ", query.strip(), "\"")
+        print("\nHazel : Do you want to search on \"", query.strip(), "\"")
         que = input("        Continue? ")
         if que == 'y' or que == 'yes' or que == 'yeah' or que == 'ya':
             os.system("socli -t linux -iq " + query)
         elif que == 'n' or que == 'no' or que == 'nop' or que == 'na' or que == 'nah':
             query = input("\nHazel : Enter the search query : ")
-            os.system("socli -t linux -iq " + query)
+            tag == input("        Enter a category for search (Linux, computer, etc; Default value is 'Linux') : ")
+            os.system("socli -t " + tag + "-iq " + query)
         else:
             print("\nHazel : It's more convinient if you could just type a 'y' or 'n'! Let's do that again.")
     except Exception as e:

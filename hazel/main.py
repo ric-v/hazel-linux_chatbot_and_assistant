@@ -119,8 +119,15 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
     elif "internet" in tokens and "speed" in tokens:
         speedtest()
 
-    elif "mail" in tokens or "email" in tokens or "e-mail" in tokens:
-        mail()
+    elif "new" in unstopped_tokens and "mail" in tokens or "new" in unstopped_tokens and "email" in tokens or "new" in unstopped_tokens and "e-mail" in tokens:
+        confirm = input("Do you wish to send a new email? ")
+        if confirm == 'y' or confirm == 'yes' or confirm == 'ya' or confirm == 'yeah' or confirm == 'yep':
+            mail()
+
+    elif "send" in unstopped_tokens and "mail" in tokens or "send" in unstopped_tokens and "email" in tokens or "send" in unstopped_tokens and "e-mail" in tokens:
+        confirm = input("Do you wish to send a new email? ")
+        if confirm == 'y' or confirm == 'yes' or confirm == 'ya' or confirm == 'yeah' or confirm == 'yep':
+            mail()
 
     elif "how" in unstopped_tokens and "to" in unstopped_tokens:
         socli(chat, unstopped_tokens)
@@ -142,8 +149,20 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
             print("no connection")
             s.close()
 
-    elif "what" in unstopped_tokens and "is" in unstopped_tokens and "my" not in unstopped_tokens:
+    elif "where" in unstopped_tokens and "is" in unstopped_tokens:
         wiki(unstopped_tokens, message)
+
+    elif "get" in unstopped_tokens and "details" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "tell" in unstopped_tokens and "me" in unstopped_tokens and "about" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "get" in unstopped_tokens and "information" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+ 
+    elif "what" in unstopped_tokens and "is" in unstopped_tokens and "my" not in unstopped_tokens:
+        socli(chat, unstopped_tokens)
 
     elif "call" in unstopped_tokens and "me" in unstopped_tokens:
         if callme == 'there' or not callme:
@@ -156,7 +175,7 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
             callme = boss()
         else:
             print("\033[1;34;1m")
-            print("\nHazel : ",callme)
+            print("\nHazel : Come on, ",callme, "stop testing our relationship! I know who you are.")
 
     elif "memory" in unstopped_tokens and "usage" in tokens or"memory" in tokens and "available" in tokens or "storage" in tokens and "space" in tokens or "harddisk" in tokens and "space" in tokens and "left" in tokens:
         meminfo()
@@ -279,14 +298,6 @@ def main():
                     tok = "install" # tok is set to install so that, all keywords that mey seem similar to install are passed to installer function
                     tokened.remove("install") # remove the checked keyword
 
-                elif "setup" in tokened:
-                    tok = "install"
-                    tokened.remove("setup")
-
-                elif "download" in tokened:
-                    tok = "install"
-                    tokened.remove("download")
-
                 elif "dont" in tokened:
                     if "want" in tokened:
                         i = i + 1 # update i value as 1st value is checked and removed
@@ -297,9 +308,13 @@ def main():
                     tok = "remove"
                     tokened.remove("want")
 
-                elif "want" in tokened:
+                elif "want" in tokened and "install" in tokened:
                     tok = "install"
                     tokened.remove("want")
+
+                elif "want" in tokened and "remove" in tokened or "want" in tokened and "remove" in tokened:
+                    tok = "remove"
+                    tokened.remove("remove")
 
                 elif "remove" in tokened:
                     tok = "remove"
