@@ -14,7 +14,6 @@ import psutil
 import random
 import getpass
 import difflib
-import getpass
 import readline
 import operator
 import platform
@@ -28,7 +27,6 @@ from systeminfo import *
 from wikiapi import WikiApi
 from hazel_chatter import *
 from package_surfer import *
-#from fileoperations import *
 from textblob import TextBlob
 from nltk.corpus import stopwords
 from prompt_toolkit import prompt
