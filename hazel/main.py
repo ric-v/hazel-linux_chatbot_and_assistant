@@ -116,6 +116,19 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
         print('Total Memory = ' + mem_T + ' MB')    
         print('Free Memory = ' + mem_F + ' MB')
 
+    elif "list" in unstopped_tokens and "browsers" in unstopped_tokens or "list" in unstopped_tokens and "browser" in unstopped_tokens or "show" in unstopped_tokens and "browser" in unstopped_tokens:
+        a = os.popen("pacaur -Qqs web browser").read().split("\n")[:20] # Search and index first 20 results
+        for i, j in enumerate(a): # display the indexed file
+            d[i] = j.split("\n")[0]
+            print(d[i])
+
+    elif "list" in unstopped_tokens and "image" in unstopped_tokens or "list" in unstopped_tokens and "image" in unstopped_tokens or "show" in unstopped_tokens and "image" in unstopped_tokens:
+        a = os.popen("pacaur -Qqs image viewer").read().split("\n")[:20] # Search and index first 20 results
+        for i, j in enumerate(a): # display the indexed file
+            d[i] = j.split("\n")[0]
+            print(d[i])
+
+
     elif "internet" in tokens and "speed" in tokens:
         speedtest()
 
@@ -169,6 +182,9 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
             callme = boss()
         else:
             print(callme)
+
+    elif "kernel" in unstopped_tokens and "version" in unstopped_tokens or "which" in unstopped_tokens and "kernel" in unstopped_tokens:
+        os.system("uname -r")  
 
     elif "my" in unstopped_tokens and "name" in unstopped_tokens:
         if callme == "there" or not callme:
