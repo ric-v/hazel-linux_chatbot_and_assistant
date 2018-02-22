@@ -7,6 +7,12 @@ What is it about?
 Hazel aims to be a beginner-friendly, assistive chatbot. Many of us know the benefits of using a free OS (like Linux, BSD, etc), yet we never use it as our primary OS. It's a general knowledge now that proprietary software and vensors force us to use their technology without giving us a choice. In my personal experience, more than cost-effectiveness or free content I felt choices very necessary and appealing.
 Hazel enable you enjoy this freedom without having to bother about the painful learning curve associated with a linux system. Hazel simply lets you enjoy the "view" while it runs "linux commands in the background". Users need not bother about having to learn how it works or how to do things. Hazel automates more than what an average user would want out of their linux machine.
 
+How does it work?
+
+The project has two main functions, one is to reply to user inputs as chat and the other is to perform the commands specified by the user in the chat. This classification is performed on the basis of the sentiment analysis; every input undergoes a sentiment analysis to check whether the input is a command or chat. A chat input has a high probability of being positive or negetive and a command is often neutral.
+
+What are the features made available and what all inputs are processed?
+
 1. Package management:
 	Package management determines a Linux distro. Each linux systems are distinguished primarly based on their package manager. Manjaro Linux uses pacman, a front end for libalpm, an arch linux package manager for managing packages. Hazel reduces your effort to install and maintain a package in your linux system without typing a single command. Users can search for their desired packages without knowing what they are called in repos. An example would be while installing gooogle chrome. In AUR, google chrome is uploaded as "google-chrome-stable", so a user who wishes to install chrome must type, "yaourt -S google-chrome-stable". What happens if you dont remember the whole command or the package name exactly, package manager offers tools to search for packages in repos. Hazel can do all those and automate your download in no time.
 
@@ -50,3 +56,17 @@ Hazel enable you enjoy this freedom without having to bother about the painful l
  5. Send E-mail:
  	You can send e-mail to anyone or any mailing service available from your Google mail. You may face error while sending mail the first time, that can be corrected by visiting https://myaccount.google.com/lesssecureapps and enabling the option. This happens due to recent changes in Gmail. 
  		eg: "Send an email"
+
+ 6. Get system information:
+ 	Get information about hard disk space, partitions, ram usage, battery usage, username, os name, kernel version, etc
+ 		eg: "show me the kernel version"
+ 			"what is the battery status"
+ 			"ram usage"
+ 			"what is my username"
+ 			"what  is the time now"
+ 			"what is the date today"
+
+ 7. Manage system users:
+ 	Add, remove, change password of existing users, etc can now be performed with an automated script
+ 		eg: "add a new user"
+ 			"change my password"

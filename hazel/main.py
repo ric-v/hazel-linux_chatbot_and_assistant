@@ -115,73 +115,35 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
         print('Free Memory = ' + mem_F + ' MB')
 
     elif "list" in unstopped_tokens and "browsers" in unstopped_tokens or "list" in unstopped_tokens and "browser" in unstopped_tokens or "show" in unstopped_tokens and "browser" in unstopped_tokens:
+        print("\033[1;34;1m")
         a = os.popen("pacaur -Qqs web browser").read().split("\n")[:20] # Search and index first 20 results
         for i, j in enumerate(a): # display the indexed file
             d[i] = j.split("\n")[0]
             print(d[i])
 
     elif "list" in unstopped_tokens and "image" in unstopped_tokens or "list" in unstopped_tokens and "image" in unstopped_tokens or "show" in unstopped_tokens and "image" in unstopped_tokens:
+        print("\033[1;34;1m")
         a = os.popen("pacaur -Qqs image viewer").read().split("\n")[:20] # Search and index first 20 results
         for i, j in enumerate(a): # display the indexed file
             d[i] = j.split("\n")[0]
             print(d[i])
 
+    elif "partitions" in unstopped_tokens and "system" in unstopped_tokens or "harddisk" in unstopped_tokens and "partitions" in unstopped_tokens or "hdd" in unstopped_tokens and "partitions" in unstopped_tokens:
+        print("\033[1;34;1m")
+        print("\n")
+        os.system("lsblk -f")
 
     elif "internet" in tokens and "speed" in tokens:
         speedtest()
 
     elif "new" in unstopped_tokens and "mail" in tokens or "new" in unstopped_tokens and "email" in tokens or "new" in unstopped_tokens and "e-mail" in tokens:
+        print("\033[1;34;1m")
         confirm = input("Do you wish to send a new email? ")
         if confirm == 'y' or confirm == 'yes' or confirm == 'ya' or confirm == 'yeah' or confirm == 'yep':
             mail()
-
-    elif "send" in unstopped_tokens and "mail" in tokens or "send" in unstopped_tokens and "email" in tokens or "send" in unstopped_tokens and "e-mail" in tokens:
-        confirm = input("Do you wish to send a new email? ")
-        if confirm == 'y' or confirm == 'yes' or confirm == 'ya' or confirm == 'yeah' or confirm == 'yep':
-            mail()
-
-    elif "how" in unstopped_tokens and "to" in unstopped_tokens:
-        socli(chat, unstopped_tokens)
-
-    elif "how" in unstopped_tokens and "can" in unstopped_tokens and "i" in unstopped_tokens:
-        socli(chat, unstopped_tokens)
-
-    elif "how" in unstopped_tokens and "will" in unstopped_tokens and "i" in unstopped_tokens:
-        socli(chat, unstopped_tokens)
-
-    elif "my" in unstopped_tokens and "ip" in tokens or "my" in unstopped_tokens and "network" in tokens and "address" in tokens or "system" in tokens and "ip" in tokens:
-        try:
-            print("\033[1;34;1m")
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(("8.8.8.8", 80))
-            print("\nHazel : Your current IP address is", s.getsockname()[0])
-            s.close()
-        except Exception as e:
-            print("no connection")
-            s.close()
-
-    elif "where" in unstopped_tokens and "is" in unstopped_tokens:
-        wiki(unstopped_tokens, message)
-
-    elif "get" in unstopped_tokens and "details" in unstopped_tokens:
-        wiki(unstopped_tokens, message)
-
-    elif "tell" in unstopped_tokens and "me" in unstopped_tokens and "about" in unstopped_tokens:
-        wiki(unstopped_tokens, message)
-
-    elif "get" in unstopped_tokens and "information" in unstopped_tokens:
-        wiki(unstopped_tokens, message)
- 
-    elif "what" in unstopped_tokens and "is" in unstopped_tokens and "my" not in unstopped_tokens:
-        socli(chat, unstopped_tokens)
-
-    elif "call" in unstopped_tokens and "me" in unstopped_tokens:
-        if callme == 'there' or not callme:
-            callme = boss()
-        else:
-            print(callme)
 
     elif "kernel" in unstopped_tokens and "version" in unstopped_tokens or "which" in unstopped_tokens and "kernel" in unstopped_tokens:
+        print("\033[1;34;1m")
         os.system("uname -r")  
 
     elif "my" in unstopped_tokens and "name" in unstopped_tokens:
@@ -211,6 +173,54 @@ def others(tokens, message, unstopped_tokens, chat): # Funtion defention of Othe
 
     elif "remove" in tokens and "user" in tokens or "remove" in tokens and "account" in tokens or "delete" in tokens and "user" in tokens or "delete" in tokens and "account" in tokens:
         deltuser(tokens)
+
+    elif "send" in unstopped_tokens and "mail" in tokens or "send" in unstopped_tokens and "email" in tokens or "send" in unstopped_tokens and "e-mail" in tokens:
+        print("\033[1;34;1m")
+        confirm = input("Do you wish to send a new email? ")
+        if confirm == 'y' or confirm == 'yes' or confirm == 'ya' or confirm == 'yeah' or confirm == 'yep':
+            mail()
+
+    elif "how" in unstopped_tokens and "to" in unstopped_tokens:
+        socli(chat, unstopped_tokens)
+
+    elif "how" in unstopped_tokens and "can" in unstopped_tokens and "i" in unstopped_tokens:
+        socli(chat, unstopped_tokens)
+
+    elif "how" in unstopped_tokens and "will" in unstopped_tokens and "i" in unstopped_tokens:
+        socli(chat, unstopped_tokens)
+
+    elif "my" in unstopped_tokens and "ip" in tokens or "my" in unstopped_tokens and "network" in tokens and "address" in tokens or "system" in tokens and "ip" in tokens:
+        try:
+            print("\033[1;34;1m")
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            print("\nHazel : Your current IP address is", s.getsockname()[0])
+            s.close()
+        except Exception as e:
+            print("\033[1;34;1m")
+            print("no connection")
+            s.close()
+
+    elif "where" in unstopped_tokens and "is" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "get" in unstopped_tokens and "details" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "tell" in unstopped_tokens and "me" in unstopped_tokens and "about" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+
+    elif "get" in unstopped_tokens and "information" in unstopped_tokens:
+        wiki(unstopped_tokens, message)
+ 
+    elif "what" in unstopped_tokens and "is" in unstopped_tokens and "my" not in unstopped_tokens:
+        socli(chat, unstopped_tokens)
+
+    elif "call" in unstopped_tokens and "me" in unstopped_tokens:
+        if callme == 'there' or not callme:
+            callme = boss()
+        else:
+            print(callme)
 
     elif "internet" in tokens and "active" in tokens or "internet" in tokens and "connected" in tokens or "available" in tokens:
         is_connected()

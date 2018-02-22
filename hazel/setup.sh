@@ -1,5 +1,7 @@
 #! /bin/bash
 
+sudo pacman -Syy --force --noconfirm python-pip yaourt expac git gcc  most make fakeroot gnome-terminal pacaur dialog
+
 mkdir nltk_data/tokenizers
 mkdir nltk_data/corpora
 
@@ -12,8 +14,6 @@ rm -rf nltk_data/
 
 sudo cp -rf hazel /usr/bin/
 sudo cp -rf Hazel.desktop /usr/share/applications/
-
-sudo pacman -Syy --force --noconfirm yaourt expac git most python2-pyqt4 make fakeroot gnome-terminal pacaur dialog
 
 pip install -r requirements.txt
 
