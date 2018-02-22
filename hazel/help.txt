@@ -60,13 +60,13 @@ What are the features made available and what all inputs are processed?
  6. Get system information:
  	Get information about hard disk space, partitions, ram usage, battery usage, username, os name, kernel version, etc
  		eg: "show me the kernel version"
- 			"what is the battery status"
- 			"ram usage"
- 			"what is my username"
- 			"what  is the time now"
- 			"what is the date today"
+ 		    "what is the battery status"
+ 		    "ram usage"
+ 		    "what is my username"
+ 		    "what  is the time now"
+ 		    "what is the date today"
 
  7. Manage system users:
  	Add, remove, change password of existing users, etc can now be performed with an automated script
  		eg: "add a new user"
- 			"change my password"
+ 		    "change my password"
